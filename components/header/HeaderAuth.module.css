@@ -1,0 +1,60 @@
+.header {
+  display: flex;
+  background-color: var(--auth-color);
+  padding: 10px;
+}
+
+.main-logo-link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  border: 1px solid black;
+}
+
+.text-gadget {
+  color: black;
+  background-color: var(--primary-color);
+  padding-right: 4px;
+  font-weight: bold;
+}
+
+.text-shop {
+  color: var(--primary-color);
+  background-color: black;
+  padding-left: 4px;
+  font-weight: bold;
+}
+
+@media (min-width: 769px) {
+  .header {
+    height: 61;
+  }
+
+  .text-gadget {
+    padding: 10px;
+    padding-left: 15px;
+  }
+  
+  .text-shop {
+    padding: 10px;
+    padding-right: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    height: 44;
+  }
+
+  .text-gadget {
+    padding: 5px;
+    padding-left: 10px;
+    font-size: 10px;
+  }
+
+  .text-shop {
+    padding: 5px;
+    padding-right: 10px;
+    font-size: 10px;
+  }
+}

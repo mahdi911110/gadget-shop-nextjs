@@ -1,0 +1,137 @@
+.main {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--auth-color);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 3px;
+  flex: 1;
+  background-color: black;
+  color: white;
+  box-shadow: 5px 5px 50px rgb(203, 85, 0);
+}
+
+.title {
+  font-weight: bold;
+  display: flex;
+  justify-content: center;
+  color: var(--auth-color);
+}
+
+.input-box {
+  display: flex;
+  justify-content: center;
+}
+
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.check {
+  cursor: pointer;
+}
+
+.button {
+  cursor: pointer;
+  color: white;
+  border: none;
+  background-color: var(--auth-color);
+  border-radius: 5px;
+}
+
+.link {
+  text-decoration: none;
+  color: rgb(81, 238, 255);
+}
+
+@media (min-width: 769px) {
+  .main {
+    min-height: calc(100vh - 61px);
+  }
+
+  .container {
+    gap: 20px;
+    padding: 40px 40px;
+    max-width: 800px;
+  }
+
+  .title {
+    font-size: var(--title-size-auth);
+  }
+
+  .input-box {
+    gap: 20px;
+  }
+
+  .box {
+    font-size: var(--text-size);
+  }
+
+  .input {
+    padding: 9px;
+    font-size: var(--text-size);
+    width: 350px;
+  }
+
+  .button {
+    padding: 10px;
+    font-size: var(--text-size);
+  }
+}
+@media (max-width: 768px) {
+  .main {
+    min-height: calc(100vh - 44px);
+  }
+
+  .main {
+    padding: 30px;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 500px;
+    padding: 30px;
+    gap: 10px;
+  }
+
+  .title {
+    font-size: var(--title-size-auth-mobile);
+  }
+  
+  .input-box {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .box {
+    font-size: var(--text-size-mobile);
+  }
+
+  .input {
+    padding: 2px;
+    font-size: var(--text-size-mobile);
+    width: 100%;
+  }
+
+  .check-box {
+    display: flex;
+    gap: 5px;
+    font-size: var(--text-size-mobile);
+  }
+
+  .button {
+    padding: 4px;
+    font-size: var(--title-size-auth-mobile);
+  }
+
+  .under-input {
+    font-size: var(--text-size-mobile);
+  }
+}

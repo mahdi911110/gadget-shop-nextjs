@@ -23,7 +23,7 @@
 
 .text-gadget {
   color: black;
-  background-color: var(--background-color);
+  background-color: var(--primary-color);
   padding: 10px;
   padding-right: 4px;
   padding-left: 15px;
@@ -31,7 +31,7 @@
 }
 
 .text-shop {
-  color: var(--background-color);
+  color: var(--primary-color);
   background-color: black;
   padding: 10px;
   padding-left: 4px;
@@ -62,13 +62,13 @@
 }
 
 .search-input:focus {
-  outline: 2px solid var(--background-color);
+  outline: 2px solid var(--primary-color);
   outline-offset: -2px;
-  border: 1px solid var(--background-color);
+  border: 1px solid var(--primary-color);
 }
 
 .search-button {
-  background-color: var(--background-color);
+  background-color: var(--primary-color);
   border: none;
   cursor: pointer;
   padding: 0 15px;
