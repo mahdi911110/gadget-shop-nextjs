@@ -1,64 +1,56 @@
 .header {
   display: flex;
   position: sticky;
-  height: 90px;
   width: 100%;
   top: 0;
   right: 0;
   left: 0;
-  gap: 20px;
-  padding: 10px 10px;
   border-bottom: 1px solid black;
 }
 
-.left-section {
+.logo-container {
   display: flex;
+  height: auto;
+  align-items: center;
 }
 
 .main-logo-link {
   text-decoration: none;
-  display: flex;
-  align-items: center;
+}
+
+.text-gadget,
+.text-shop {
+  font-weight: bold;
 }
 
 .text-gadget {
   color: black;
   background-color: var(--primary-color);
-  padding: 10px;
   padding-right: 4px;
-  padding-left: 15px;
-  font-weight: bold;
 }
 
 .text-shop {
   color: var(--primary-color);
   background-color: black;
-  padding: 10px;
   padding-left: 4px;
-  padding-right: 15px;
-  font-weight: bold;
 }
 
 .middle-section {
   display: flex;
-  flex: 1;
-  padding: 10px 40px;
   justify-content: center;
 }
 
 .search-box {
   display: flex;
   width: 100%;
-  max-width: 700px;
+  height: auto;
 }
 
 .search-input {
   flex: 1;
   min-width: 0;
-  padding: 0 20px;
   border-radius: 5px 0 0 5px;
   border: 1px solid gray;
-  font-size: 20px;
 }
 
 .search-input:focus {
@@ -71,13 +63,121 @@
   background-color: var(--primary-color);
   border: none;
   cursor: pointer;
-  padding: 0 15px;
   border-radius: 0 5px 5px 0;
+  flex-shrink: 0;
 }
 
 .right-section {
   display: flex;
-  gap: 20px;
   justify-content: center;
   align-items: center;
+}
+
+@media (min-width: 769px) {
+  .header {
+    gap: 20px;
+    padding: 10px;
+    height: 90px;
+  }
+
+  .left-section {
+    display: flex;
+  }
+
+  .text-gadget {
+    padding: 10px;
+    padding-left: 15px;
+  }
+
+  .text-shop {
+    padding: 10px;
+    padding-right: 15px;
+  }
+
+  .middle-section {
+    flex: 1;
+    height: 100%;
+    padding: 10px 40px;
+  }
+
+  .search-box {
+    max-width: 700px;
+  }
+
+  .search-input {
+    
+    padding: 0 20px;
+    font-size: 20px;
+  }
+
+  .search-button {
+    padding: 0 15px;
+  }
+
+  .right-section {
+    gap: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    flex-wrap: wrap;
+    height: auto;
+    gap: 8px;
+    padding: 8px;
+    min-height: 90px;
+  }
+
+  .left-section {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .main-logo-link {
+    display: flex;
+    flex: 0 0 auto;
+  }
+
+  .text-gadget {
+    padding: 5px;
+    padding-left: 12px;
+    font-size: 15px;
+  }
+
+  .text-shop {
+    padding: 5px;
+    padding-right: 12px;
+    font-size: 15px;
+  }
+
+  .middle-section {
+    order: 3;
+    flex-basis: 100%;
+    padding: 0;
+  }
+
+  .search-box {
+    max-width: none;
+  }
+
+  .search-input {
+    height: 40px;
+    padding: 0 12px;
+    font-size: 15px;
+  }
+
+  .search-button {
+    height: 40px;
+    padding: 0 10px;
+  }
+
+  .right-section {
+    gap: 10px;
+    flex-shrink: 0;
+  }
+
+  .right-section img {
+    width: 35px;
+    height: 35px;
+  }
 }

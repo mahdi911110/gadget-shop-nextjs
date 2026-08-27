@@ -9,17 +9,20 @@ export default function Header() {
   return (
     <header className={styles.header}>
       <div className={styles['left-section']}>
-        <Link href="/" className={styles['main-logo-link']}>
-          <span className={styles['text-gadget']}>GADGET</span>
-          <span className={styles['text-shop']}>SHOP</span>
-        </Link>
+        <div className={styles['logo-container']}>
+          <Link href="/" className={styles['main-logo-link']}>
+            <span className={styles['text-gadget']}>GADGET</span>
+            <span className={styles['text-shop']}>SHOP</span>
+          </Link>
+        </div>
       </div>
       <div className={styles['middle-section']}>
-        <div className='search-box'></div>
-        <input className={styles['search-input']} type="text" placeholder='Search a product' />
-        <button className={styles['search-button']}>
+        <div className={styles['search-box']}>
+          <input className={styles['search-input']} type="text" placeholder='Search a product' />
+          <button className={styles['search-button']}>
           <Image className={styles['search-button-img']} width={35} height={35} src="/icons/search.svg" alt="Search" />
-        </button>
+          </button>
+        </div>
       </div>
       <div className={styles['right-section']}>
         <NavLink href="/orders" classCss={styles['order-link']}>
