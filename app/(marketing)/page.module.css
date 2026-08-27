@@ -1,0 +1,107 @@
+.main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+  box-shadow: 0 2px 10px gray;
+  border-radius: 10px;
+  gap: 20px;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+}
+
+.card-img {
+  object-fit: contain;
+}
+
+.card-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+
+.card-title {
+  font-weight: bold;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-description {
+  font-size: 12px;
+  color: gray;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+.card-count {
+  color: gray;
+}
+
+.card-money-container {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.card-money {
+  color: black;
+  font-weight: bold;
+}
+
+.card-discount {
+  color: gray;
+  font-weight: bold;
+  font-size: 12px;
+  text-decoration: line-through;
+}
+
+.card-button-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.card-link-show,
+.card-button-add {
+  cursor: pointer;
+}
+
+.card-link-show {
+  background-color: rgb(214, 214, 214);
+  text-decoration: none;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 10px;
+}
+
+.card-button-add {
+  background-color: var(--primary-color);
+  color: black;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 10px;
+}
