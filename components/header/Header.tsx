@@ -29,7 +29,10 @@ export default function Header() {
           <Image className={styles['order-link-img']} width={widthHeight} height={widthHeight} src="/icons/order.svg" alt="Order" />
         </NavLink>
         <NavLink href="/cart" classCss={styles['cart-link']}>
-          <Image className={styles['cart-link-img']} width={widthHeight} height={widthHeight} src="/icons/cart.svg" alt="Cart" />
+          <div className={styles.cart}>
+            <Image className={styles['cart-link-img']} width={widthHeight} height={widthHeight} src="/icons/cart.svg" alt="Cart" />
+            <span className={styles['cart-count']}>0</span>
+          </div>
         </NavLink>
         <NavLink href="/login" classCss={styles['login']}>
           <Image className={styles['login-img']} width={widthHeight} height={widthHeight} src="/icons/login.svg" alt="Login" />
