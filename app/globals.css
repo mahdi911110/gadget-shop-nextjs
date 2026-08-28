@@ -12,5 +12,6 @@
   --text-size: 20px;
   --text-size-mobile: 13px;
   --title-size-auth: 30px;
-  --title-size-auth-mobile: 15px; 
+  --title-size-auth-mobile: 15px;
+  --border-color: rgb(220, 220, 220);
 }
