@@ -30,6 +30,7 @@ export default function Home() {
             <div className={styles['card-money']}>$2499</div>
             <div className={styles['card-discount']}>$2699</div>
           </div>
+          <div className={styles['text-added']}>✓ Added</div>
           <div className={styles['card-button-container']}>
             <Link href="/" className={styles['card-link-show']}>👁 View</Link>
             <button className={styles['card-button-add']}>Add to Cart</button>
@@ -61,6 +62,7 @@ export default function Home() {
             <div className={styles['card-money']}>$2499</div>
             <div className={styles['card-discount']}>$2699</div>
           </div>
+          <div className={styles['text-added']}>✓ Added</div>
           <div className={styles['card-button-container']}>
             <Link href="/" className={styles['card-link-show']}>👁 View</Link>
             <button className={styles['card-button-add']}>Add to Cart</button>
@@ -92,6 +94,7 @@ export default function Home() {
             <div className={styles['card-money']}>$2499</div>
             <div className={styles['card-discount']}>$2699</div>
           </div>
+          <div className={styles['text-added']}>✓ Added</div>
           <div className={styles['card-button-container']}>
             <Link href="/" className={styles['card-link-show']}>👁 View</Link>
             <button className={styles['card-button-add']}>Add to Cart</button>

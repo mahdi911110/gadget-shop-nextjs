@@ -32,7 +32,7 @@ export default function OrdersPage() {
               <div className={styles['order-text-container']}>
                 <div className={styles['order-text-title']}>MacBook 16 Pro</div>
                 <div className={styles['button-buy-again-container']}>
-                  <button className={styles['button-buy-again']}>Buy Again</button>
+                  <button className={styles['button-buy-again']}>⭮ Buy Again</button>
                 </div>
               </div>
             </div>
@@ -50,7 +50,7 @@ export default function OrdersPage() {
               <div className={styles['order-text-container']}>
                 <div className={styles['order-text-title']}>MacBook 16 Pro</div>
                 <div className={styles['button-buy-again-container']}>
-                  <button className={styles['button-buy-again']}>Buy Again</button>
+                  <button className={styles['button-buy-again']}>⭮ Buy Again</button>
                 </div>
               </div>
             </div>
@@ -68,7 +68,7 @@ export default function OrdersPage() {
               <div className={styles['order-text-container']}>
                 <div className={styles['order-text-title']}>MacBook 16 Pro</div>
                 <div className={styles['button-buy-again-container']}>
-                  <button className={styles['button-buy-again']}>Buy Again</button>
+                  <button className={styles['button-buy-again']}>⭮ Buy Again</button>
                 </div>
               </div>
             </div>
@@ -104,7 +104,7 @@ export default function OrdersPage() {
               <div className={styles['order-text-container']}>
                 <div className={styles['order-text-title']}>MacBook 16 Pro</div>
                 <div className={styles['button-buy-again-container']}>
-                  <button className={styles['button-buy-again']}>Buy Again</button>
+                  <button className={styles['button-buy-again']}>⭮ Buy Again</button>
                 </div>
               </div>
             </div>
@@ -122,7 +122,7 @@ export default function OrdersPage() {
               <div className={styles['order-text-container']}>
                 <div className={styles['order-text-title']}>MacBook 16 Pro</div>
                 <div className={styles['button-buy-again-container']}>
-                  <button className={styles['button-buy-again']}>Buy Again</button>
+                  <button className={styles['button-buy-again']}>⭮ Buy Again</button>
                 </div>
               </div>
             </div>
@@ -140,7 +140,7 @@ export default function OrdersPage() {
               <div className={styles['order-text-container']}>
                 <div className={styles['order-text-title']}>MacBook 16 Pro</div>
                 <div className={styles['button-buy-again-container']}>
-                  <button className={styles['button-buy-again']}>Buy Again</button>
+                  <button className={styles['button-buy-again']}>⭮ Buy Again</button>
                 </div>
               </div>
             </div>
