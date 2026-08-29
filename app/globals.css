@@ -8,10 +8,19 @@
 
 :root {
   --primary-color: #FFD60A;
+  --view-color: rgb(214, 214, 214);
   --auth-color: rgb(255, 191, 41);
   --text-size: 20px;
   --text-size-mobile: 13px;
   --title-size-auth: 30px;
   --title-size-auth-mobile: 15px;
   --border-color: rgb(220, 220, 220);
+  --padding-left: 60px;
+  --padding-left-add-product: 50px;
+  --padding-top-pc: 55px;
+  --padding-top-user-pc: 90px;
+  --padding-left-pc: 160px;
+  --padding-right-pc: 20px;
+  --th-font-size-mobile: 12px;
+  --td-font-size-mobile: 10px;
 }

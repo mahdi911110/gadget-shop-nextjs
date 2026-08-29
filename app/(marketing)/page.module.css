@@ -98,7 +98,7 @@
 }
 
 .card-link-show {
-  background-color: rgb(214, 214, 214);
+  background-color: var(--view-color);
   text-decoration: none;
   color: black;
   padding: 5px 10px;

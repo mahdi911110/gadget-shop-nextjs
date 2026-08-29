@@ -1,7 +1,13 @@
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
   display: flex;
-  background-color: var(--auth-color);
   padding: 10px;
+  justify-content: space-between;
+  border-bottom: 1px solid gray;
 }
 
 .main-logo-link {
@@ -24,10 +30,29 @@
   font-weight: bold;
 }
 
+.admin-logout {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.text-admin {
+  font-weight: bold;
+}
+
+.button-logout {
+  height: 100%;
+  padding: 0 10px;
+  cursor: pointer;
+  border: none;
+  background-color: black;
+  color: white;
+}
+
 @media (min-width: 769px) {
   .header {
-    height: 61px;
-    padding-top: 38px;
+    height: 80px;
+    padding-top: 20px;
   }
 
   .text-gadget {
@@ -38,6 +63,16 @@
   .text-shop {
     padding: 10px;
     padding-right: 15px;
+  }
+
+  .text-admin {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+
+  .button-logout {
+    height: 39.33px;
   }
 }
 
@@ -57,5 +92,13 @@
     padding: 5px;
     padding-right: 12px;
     font-size: 15px;
+  }
+
+  .admin-logout {
+    gap: 7px;
+  }
+
+  .button-logout {
+    height: 28px;
   }
 }
