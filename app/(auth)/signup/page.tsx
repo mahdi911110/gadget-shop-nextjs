@@ -5,7 +5,7 @@ import Link from 'next/link';
 export default function Signup() {
   return (
     <main className={styles.main}>
-      <div className={styles.container}>
+      <form className={styles.container}>
         <div className={styles.title}>SIGN UP</div>
         <div className={styles['input-box']}>
           <div className={styles.box}>
@@ -61,7 +61,7 @@ export default function Signup() {
             Login
           </Link>
         </div>
-      </div>
+      </form>
     </main>
   );
 }

@@ -12,6 +12,7 @@ db.exec(`
     username TEXT UNIQUE NOT NULL,
     email TEXT UNIQUE NOT NULL,
     phone_number TEXT UNIQUE NOT NULL,
+    address TEXT NOT NULL,
     country TEXT NOT NULL,
     city TEXT NOT NULL,
     birthday TEXT NOT NULL,
@@ -91,8 +92,9 @@ export async function createAdmin() {
       city,
       birthday,
       password_hash,
+      created_at,
       role
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
   
   insert.run(
@@ -103,14 +105,16 @@ export async function createAdmin() {
     'Null',
     'Null',
     passwordHash,
+    dayjs().format('YYYY-MM-DD HH:mm:ss'),
     'admin'
   );
 }
 
-export async function addUser(
+export async function singup(
   username: string,
   email: string,
   phone_number: string,
+  address: string,
   country: string,
   city: string,
   birthday: string,
@@ -122,12 +126,13 @@ export async function addUser(
       username,
       email,
       phone_number,
+      address,
       country,
       city,
       birthday,
       password_hash,
       created_at
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
   insert.run(
     username,
@@ -363,4 +368,28 @@ export function getOrders() {
   `).all() as OrdersType[];
 
   return orders;
+}
+
+export async function login(emailOrUsername: string, password: string) {
+  const user = db.prepare(`
+    SELECT
+      email,
+      username,
+      password_hash,
+      role
+    FROM users WHERE email = ? OR username = ?
+  `).get(emailOrUsername, emailOrUsername) as { email: string; username: string; password_hash: string; role: string} | undefined;
+
+  const errorMessage = 'Email or password is incorrect';
+
+  if (!user) {
+    return { error: errorMessage };
+  }
+
+  const passwordCorrect = await bcrypt.compare(password, user.password_hash);
+  if (!passwordCorrect) {
+    return { error: errorMessage };
+  }
+
+  return { user };
 }

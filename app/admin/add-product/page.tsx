@@ -1,9 +1,10 @@
 import styles from "./page.module.css";
+import addProductAction from "./ActionProductForm";
 
 export default function AddProduct() {
   return (
     <main className={styles.main}>
-      <form className={styles.card}>
+      <form className={styles.card} action={addProductAction}>
         <div className={styles["card-container"]}>
           <label className={styles["card-title"]}>Product Name</label>
           <input

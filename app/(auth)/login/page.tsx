@@ -1,23 +1,30 @@
+'use client';
+
 import Link from "next/link";
 
+import loginAction from "./login";
+import { useActionState } from "react";
 import styles from '../auth.module.css';
-export default function Login() {
+
+export default function LoginPage() {
+  const [errorMessage, formAction, isPending] = useActionState(loginAction, null);
   return (
     <main className={styles.main}>
-      <div className={styles.container}>
+      <form className={styles.container} action={formAction}>
         <div className={styles.title}>LOGIN</div>
         <div className={styles.box}>
           <div className={styles.text}>Email:</div>
-          <input className={styles.input} type="text" placeholder="Email or username" />
+          <input className={styles.input} name="email" type="text" placeholder="Email or username" />
         </div>
         <div className={styles.box}>
           <div className={styles.text}>Password:</div>
-          <input className={styles.input} type="password" placeholder="Password" />
+          <input className={styles.input} name="password" type="password" placeholder="Password" />
         </div>
         <div className={styles['check-box']}>
           <input className={styles.check} type="checkbox"/> Show password
         </div>
-        <button className={styles.button}>Login</button>
+        {errorMessage && (<div className={styles.error}>{errorMessage}</div>)}
+        <button className={styles.button} type="submit">Login</button>
         <div className={styles['under-input']}>
           {"Forgot Your Password? "} 
           <Link className={styles.link} href="/forgot-password">
@@ -30,7 +37,7 @@ export default function Login() {
             Create Account
           </Link>
         </div>
-      </div>
+      </form>
     </main>
   );
 }

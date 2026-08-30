@@ -50,6 +50,10 @@
   color: rgb(81, 238, 255);
 }
 
+.error {
+  color: red;
+}
+
 @media (min-width: 769px) {
   .main {
     min-height: calc(100vh - 61px);
