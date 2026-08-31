@@ -370,13 +370,13 @@ export function getUsers() {
       users.city,
       users.birthday,
       users.created_at,
-      SUM(order_items.quantity) AS totalQuantity,
-      SUM(order_items.price_cents * order_items.quantity) AS totalSpent
+      COALESCE(SUM(order_items.quantity), 0) AS totalQuantity,
+      COALESCE(SUM(order_items.price_cents * order_items.quantity), 0) AS totalSpent
     FROM users
-    JOIN orders ON users.id = orders.user_id
-    JOIN order_items ON orders.id = order_items.order_id
+    LEFT JOIN orders ON users.id = orders.user_id
+    LEFT JOIN order_items ON orders.id = order_items.order_id
     GROUP BY users.id
-    GROUP BY users.id DESC
+    ORDER BY users.id DESC
   `).all();
 
   return users;

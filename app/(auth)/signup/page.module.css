@@ -46,10 +46,6 @@
   border-radius: 5px;
 }
 
-.loading {
-  opacity: 0.5;
-}
-
 .link {
   text-decoration: none;
   color: rgb(81, 238, 255);

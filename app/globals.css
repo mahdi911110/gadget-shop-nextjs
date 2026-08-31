@@ -24,3 +24,7 @@
   --th-font-size-mobile: 12px;
   --td-font-size-mobile: 10px;
 }
+
+.loading {
+  opacity: 0.5;
+}

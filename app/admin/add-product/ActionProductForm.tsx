@@ -3,7 +3,11 @@
 import { addProduct } from "@/lib/shopdb";
 import cloudinary from "@/lib/cloudinary";
 
-export default async function addProductAction(formData: FormData) {
+type PrevState = {
+  error?: string
+} | null;
+
+export default async function addProductAction(prevState: PrevState, formData: FormData) {
   const image = formData.get('image') as File;
   
   if (!image || image.size === 0) {
@@ -37,6 +41,18 @@ export default async function addProductAction(formData: FormData) {
   const category = formData.get('category');
   const description = formData.get('description');
   
+  if (
+    !name ||
+    !price ||
+    !stock ||
+    !category ||
+    !description ||
+    !image ||
+    !imageUrl
+  ) {
+    return { error: 'Fields must not be empty.' }
+  }
+  
   addProduct(
     String(name),
     Number(price) * 100,
@@ -45,4 +61,6 @@ export default async function addProductAction(formData: FormData) {
     String(description),
     imageUrl
   );
+  
+  return null;
 }

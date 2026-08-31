@@ -1,10 +1,14 @@
+'use client';
+
 import styles from "./page.module.css";
 import addProductAction from "./ActionProductForm";
+import { useActionState } from "react";
 
 export default function AddProduct() {
+  const [state, formAction, isPending] = useActionState(addProductAction, null);
   return (
     <main className={styles.main}>
-      <form className={styles.card} action={addProductAction}>
+      <form className={styles.card} action={formAction}>
         <div className={styles["card-container"]}>
           <label className={styles["card-title"]}>Product Name</label>
           <input
@@ -72,8 +76,8 @@ export default function AddProduct() {
           <button className={styles["button-reset"]} type="reset">
             Reset
           </button>
-          <button className={styles["button-add"]} type="submit">
-            Add
+          <button className={isPending ? `${styles["button-add"]} loading` : styles["button-add"]} type="submit" disabled={isPending}>
+            {isPending ? 'Adding...' : 'Add'}
           </button>
         </div>
       </form>
