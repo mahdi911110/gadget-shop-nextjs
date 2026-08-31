@@ -1,7 +1,16 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
+import { getCurrentUser } from "@/lib/shopdb";
 
 import styles from '../auth.module.css';
-export default function Forget() {
+
+export default async function Forget() {
+  const user = await getCurrentUser();
+  
+  if (user) {
+    redirect('/profile');
+  }
+
   return (
     <main className={styles.main}>
       <div className={styles.container}>

@@ -1,6 +1,7 @@
 import Database from 'better-sqlite3';
 import bcrypt from 'bcrypt';
 import dayjs from 'dayjs';
+import { cookies } from 'next/headers';
 
 const db = new Database('shop.db');
 
@@ -64,6 +65,13 @@ db.exec(`
     UNIQUE (order_id, product_id),
     FOREIGN KEY (order_id) REFERENCES orders(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
+  );
+
+  CREATE TABLE IF NOT EXISTS session (
+    id TEXT PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    expire_at TEXT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id)
   );
 `);
 
@@ -403,12 +411,13 @@ export function getOrders() {
 export async function login(emailOrUsername: string, password: string) {
   const user = db.prepare(`
     SELECT
+      id,
       email,
       username,
       password_hash,
       role
     FROM users WHERE email = ? OR username = ?
-  `).get(emailOrUsername, emailOrUsername) as { email: string; username: string; password_hash: string; role: string} | undefined;
+  `).get(emailOrUsername, emailOrUsername) as { id: number; email: string; username: string; password_hash: string; role: string} | undefined;
 
   const errorMessage = 'Email or password is incorrect';
 
@@ -422,4 +431,43 @@ export async function login(emailOrUsername: string, password: string) {
   }
 
   return { user };
+}
+
+export function setSession(
+    id: string,
+    userId: number,
+    expiresAt: string
+  ) {
+  const session = db.prepare(`
+    INSERT INTO session (
+      id,
+      user_id,
+      expire_at
+    ) VALUES (?, ?, ?)
+  `);
+
+  session.run(id, userId, expiresAt);
+}
+
+export async function getCurrentUser() {
+  const cookieStore = await cookies();
+
+  const sessionId = cookieStore.get('session')?.value;
+
+  if (!sessionId) {
+    return null;
+  }
+
+  const session = db.prepare(`
+    SELECT
+      users.id,
+      users.username,
+      users.email,
+      users.role
+    FROM session
+    JOIN users ON session.user_id = users.id
+    WHERE session.id = ? AND session.expire_at > ?
+  `).get(sessionId, new Date().toISOString());
+
+  return session ?? null;
 }

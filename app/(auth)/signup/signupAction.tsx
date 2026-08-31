@@ -1,6 +1,6 @@
 'use server';
 
-import { signup } from "@/lib/shopdb";
+import { getCurrentUser, signup } from "@/lib/shopdb";
 import { redirect } from "next/navigation";
 
 type PrevState = {
@@ -66,6 +66,12 @@ export default async function signupAction(prevState: PrevState | null, formData
 
   if (result?.error) {
     return result;
+  }
+
+  const user = await getCurrentUser();
+
+  if (user) {
+    redirect('/profile');
   }
   
   redirect('/');

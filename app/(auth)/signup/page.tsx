@@ -109,8 +109,8 @@ export default function Signup() {
               required
             />
           </div>
-          <div className={state?.passwordError ? `${styles.error}` : `${styles['text-password']}`}>Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.</div>
         </div>
+        <div className={state?.passwordError ? `${styles.error}` : `${styles['text-password']}`}>Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.</div>
         <div className={styles["check-box"]}>
           <input
             className={styles.check}
