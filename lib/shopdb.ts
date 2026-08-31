@@ -88,17 +88,19 @@ export async function createAdmin() {
       username,
       email,
       phone_number,
+      address,
       country,
       city,
       birthday,
       password_hash,
       created_at,
       role
-    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
   
   insert.run(
     'admin',
+    'Null',
     'Null',
     'Null',
     'Null',
@@ -110,7 +112,7 @@ export async function createAdmin() {
   );
 }
 
-export async function singup(
+export async function signup(
   username: string,
   email: string,
   phone_number: string,
@@ -118,8 +120,32 @@ export async function singup(
   country: string,
   city: string,
   birthday: string,
-  password: string
+  password: string,
   ) {
+  let find = db.prepare(`
+    SELECT id FROM users WHERE username = ?
+  `).get(username);
+
+  if (find) {
+    return { error: 'username exists! type another username.' }
+  }
+
+  find = db.prepare(`
+    SELECT id FROM users WHERE email = ?
+  `).get(email);
+
+  if (find) {
+    return { error: 'email exists! type another email.' }
+  }
+
+  find = db.prepare(`
+    SELECT id FROM users WHERE phone_number = ?
+  `).get(phone_number);
+
+  if (find) {
+    return { error: 'phone number exists! type another phone number.' }
+  }
+
   const passwordHash = await bcrypt.hash(password, 12);
   const insert = db.prepare(`
     INSERT INTO users (
@@ -134,16 +160,20 @@ export async function singup(
       created_at
     ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
   `);
+
   insert.run(
     username,
     email,
     phone_number,
+    address,
     country,
     city,
     birthday,
     passwordHash,
     dayjs().format('YYYY-MM-DD HH:mm:ss')
   );
+
+  return null;
 }
 
 export function addProduct(

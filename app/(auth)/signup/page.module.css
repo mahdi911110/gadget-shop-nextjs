@@ -46,9 +46,17 @@
   border-radius: 5px;
 }
 
+.loading {
+  opacity: 0.5;
+}
+
 .link {
   text-decoration: none;
   color: rgb(81, 238, 255);
+}
+
+.error {
+  color: red;
 }
 
 @media (min-width: 769px) {
@@ -132,6 +140,11 @@
   }
 
   .under-input {
+    font-size: var(--text-size-mobile);
+  }
+
+  .error,
+  .text-password {
     font-size: var(--text-size-mobile);
   }
 }
