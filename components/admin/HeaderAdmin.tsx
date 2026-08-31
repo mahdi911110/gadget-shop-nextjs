@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 import styles from './HeaderAdmin.module.css';
+import logoutAction from '@/action/logoutAction';
 
 export default function HeaderAdmin() {
   return (
@@ -11,9 +12,11 @@ export default function HeaderAdmin() {
       </Link>
       <div className={styles['admin-logout']}>
         <div className={styles['text-admin']}>Admin 👤</div>
-        <button className={styles['button-logout']}>
-          Logout
-        </button>
+        <form action={logoutAction}>
+					<button className={styles['button-logout']}>
+						Logout
+					</button>
+        </form>
       </div>
     </header>
   );

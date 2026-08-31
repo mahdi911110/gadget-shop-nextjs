@@ -471,3 +471,15 @@ export async function getCurrentUser() {
 
   return session ?? null;
 }
+
+export function deleteSessionFromDB(sessionId: string) {
+  db.prepare(`
+    DELETE FROM session WHERE id = ?
+  `).run(sessionId);
+}
+
+export function deleteUsersFromDB(userId: number) {
+  db.prepare(`
+    DELETE FROM users WHERE id = ?
+  `).run(userId);
+}
