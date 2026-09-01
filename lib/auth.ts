@@ -1,5 +1,5 @@
 import { cookies } from "next/headers"; 
-import { deleteSessionFromDB, setSession } from "./shopdb";
+import { deleteSessionFromDB, getCurrentUserFromDB, setSession } from "./shopdb";
 
 export async function createSession(userId: number) {
   const sessionId = crypto.randomUUID();
@@ -36,4 +36,29 @@ export async function deleteSession() {
   deleteSessionFromDB(sessionId);
 
   cookieStore.delete('session');
+}
+
+type UserSession = {
+  id: number,
+  username: string,
+  email: string,
+  role: string
+} | null;
+
+export async function getCurrentUser() {
+  const cookieStore = await cookies();
+
+  const sessionId = cookieStore.get('session')?.value;
+
+  if (!sessionId) {
+    return null;
+  }
+
+  const user = getCurrentUserFromDB(sessionId) as UserSession;
+
+  if (!user) {
+    return null;
+  }
+
+  return user;
 }

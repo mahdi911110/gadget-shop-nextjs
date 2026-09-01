@@ -1,7 +1,5 @@
 import { Roboto } from 'next/font/google';
 import './globals.css';
-import { getCurrentUser } from '@/lib/shopdb';
-import { redirect } from 'next/navigation';
 
 const roboto = Roboto({
   subsets: ['latin'],

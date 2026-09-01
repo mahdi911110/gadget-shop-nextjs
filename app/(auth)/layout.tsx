@@ -1,6 +1,6 @@
 import HeaderAuth from '@/components/header/HeaderAuth';
 import '../globals.css';
-import { getCurrentUser } from '@/lib/shopdb';
+import { getCurrentUser } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {

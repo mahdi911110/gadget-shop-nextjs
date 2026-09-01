@@ -3,7 +3,7 @@ import Link from "next/link";
 
 import NavLink from "./NavLink";
 import styles from "./Header.module.css";
-import { getCurrentUser } from "@/lib/shopdb";
+import { getCurrentUser } from "@/lib/auth";
 
 export default async function Header() {
   const user = await getCurrentUser();

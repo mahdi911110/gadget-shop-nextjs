@@ -1,6 +1,6 @@
 import HeaderAdmin from '@/components/admin/HeaderAdmin';
 import SidebarAdmin from '@/components/admin/SidebarAdmin';
-import { getCurrentUser } from '@/lib/shopdb';
+import { getCurrentUser } from '@/lib/auth';
 
 import '../globals.css';
 import { redirect } from 'next/navigation';

@@ -2,6 +2,7 @@ import Link from "next/link";
 import styles from "./page.module.css";
 import Image from "next/image";
 import { getProducts } from "@/lib/shopdb";
+import AddToCartButton from "./AddToCartButton";
 
 type ProductType = {
   id: number,
@@ -13,7 +14,7 @@ type ProductType = {
   image_url: string
 }
 
-export default function Home() {
+export default async function Home() {
   const products = getProducts() as ProductType[];
   
   return (
@@ -47,7 +48,7 @@ export default function Home() {
             <div className={styles['text-added']}>✓ Added</div>
             <div className={styles['card-button-container']}>
               <Link href="/" className={styles['card-link-show']}>👁 View</Link>
-              <button className={styles['card-button-add']}>Add to Cart</button>
+              <AddToCartButton productId={product.id} />
             </div>
           </div>
         </div>

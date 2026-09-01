@@ -1,7 +1,6 @@
 import Database from 'better-sqlite3';
 import bcrypt from 'bcrypt';
 import dayjs from 'dayjs';
-import { cookies } from 'next/headers';
 
 const db = new Database('shop.db');
 
@@ -239,16 +238,16 @@ export const addToCart = db.transaction(
   `).get(product_id) as { stock: number } | undefined;
 
   if (!product) {
-    throw new Error('Product not found');
+    return { error: 'Product not found' };
   }
 
   if (product.stock < 1) {
-    throw new Error('Product is out of stock');
+    return { error: 'Product is out of stock' };
   }
 
   if (cartItem) {
     if (cartItem.quantity >= product.stock) {
-      throw new Error('Not enough stock');
+      return { error: 'Not enough stock' };
     }
 
     db.prepare(`
@@ -263,6 +262,7 @@ export const addToCart = db.transaction(
       ) VALUES (?, ?, ?)
     `).run(cart.id, product_id, 1);
   }
+  return null;
 });
 
 type OrderProduct = {
@@ -451,15 +451,7 @@ export function setSession(
   session.run(id, userId, expiresAt);
 }
 
-export async function getCurrentUser() {
-  const cookieStore = await cookies();
-
-  const sessionId = cookieStore.get('session')?.value;
-
-  if (!sessionId) {
-    return null;
-  }
-
+export function getCurrentUserFromDB(sessionId: string) {
   const session = db.prepare(`
     SELECT
       users.id,

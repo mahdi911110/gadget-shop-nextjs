@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
-import { getCurrentUser } from "@/lib/shopdb";
+import { getCurrentUser } from "@/lib/auth";
 
 import styles from '../auth.module.css';
 

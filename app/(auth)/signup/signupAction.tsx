@@ -1,7 +1,8 @@
 'use server';
 
-import { getCurrentUser, signup } from "@/lib/shopdb";
+import { signup } from "@/lib/shopdb";
 import { redirect } from "next/navigation";
+import { getCurrentUser } from "@/lib/auth";
 
 type PrevState = {
   error?: string

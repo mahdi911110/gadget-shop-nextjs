@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { getCurrentUser } from "@/lib/shopdb";
+import { getCurrentUser } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
 import styles from '../auth.module.css';
