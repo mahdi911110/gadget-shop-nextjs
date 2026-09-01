@@ -48,7 +48,8 @@
 
 .button-remove,
 .button-add,
-.button-delete {
+.button-delete,
+.button-edit {
   border: none;
   padding: 3px 8px;
   border-radius: 5px;
@@ -57,8 +58,8 @@
   transition: opacity 0.2s, transform 0.2s;
 }
 
-.button-remove {
-  background-color: rgb(255, 106, 106);
+.button-edit {
+  background-color: rgb(0, 157, 255);
 }
 
 .button-add {
@@ -69,22 +70,16 @@
   background-color: red;
 }
 
-.button-delete:hover {
+.button-delete:hover,
+.button-add:hover,
+.button-edit:hover {
   opacity: 0.7;
 }
 
-.button-delete:active {
+.button-delete:active,
+.button-add:active,
+.button-edit:active {
   opacity: 0.5;
-}
-
-.button-remove:hover,
-.button-add:hover {
-  transform: scale(1.09);
-}
-
-.button-remove:active,
-.button-add:active {
-  transform: scale(1);
 }
 
 .input-edit {
@@ -203,6 +198,16 @@
 
 .radio:checked::after {
   transform: translate(-50%, -50%) scale(1.5);
+}
+
+.loading-text {
+  font-weight: bold;
+  color: gray;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
 }
 
 @media (min-width: 1001px) {

@@ -43,6 +43,7 @@ db.exec(`
     cart_id INTEGER NOT NULL,
     product_id INTEGER NOT NULL,
     quantity INTEGER NOT NULL CHECK (quantity >= 1),
+    delivery_option INTEGER NOT NULL DEFAULT 0 CHECK (delivery_option IN (0, 1, 2)),
     UNIQUE (cart_id, product_id),
     FOREIGN KEY (cart_id) REFERENCES carts(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
@@ -53,6 +54,7 @@ db.exec(`
     user_id INTEGER NOT NULL,
     status TEXT NOT NULL DEFAULT 'pending',
     created_at TEXT NOT NULL,
+    delivery_option INTEGER NOT NULL DEFAULT 0 CHECK (delivery_option IN (0, 1, 2)),
     FOREIGN KEY (user_id) REFERENCES users(id)
   );
 
@@ -491,8 +493,8 @@ export function handleUserActiveStatus(userId: number) {
 
 export function migrateToDB() {
   db.exec(`
-    ALTER TABLE users
-    ADD COLUMN is_active INTEGER NOT NULL DEFAULT 1;
+    ALTER TABLE orders
+    ADD COLUMN delivery_option INTEGER NOT NULL DEFAULT 0 CHECK (delivery_option IN (0, 1, 2));
   `);
 }
 
@@ -599,6 +601,19 @@ export function handleQuantity(userId: number, productId: number, quantity: numb
   `).run(quantity, productId, userId);
 }
 
+export function handleSetQuantity(userId: number, productId: number, quantity: number) { 
+  db.prepare(`
+   UPDATE cart_items
+    SET quantity = ?
+    WHERE product_id = ?
+      AND cart_id IN (
+        SELECT id
+        FROM carts
+        WHERE user_id = ?
+      )
+  `).run(quantity, productId, userId);
+}
+
 export function getQuantity(userId: number) {
   const userProduct = db.prepare(`
     SELECT
@@ -610,4 +625,70 @@ export function getQuantity(userId: number) {
   `).get(userId) as { totalQuantity: number} | undefined;
 
   return userProduct?.totalQuantity;
+}
+
+export function getUserCart(userId: number) {
+  const cartItems = db.prepare(`
+    SELECT
+      products.id AS productId,
+      products.price_cents,
+      products.image_url,
+      products.product_name,
+      cart_items.quantity,
+      cart_items.delivery_option,
+      cart_items.id AS cartItemsId
+    FROM products
+    JOIN cart_items ON cart_items.product_id = products.id
+    JOIN carts ON carts.id = cart_items.cart_id
+    WHERE carts.user_id = ?
+    ORDER BY cart_items.id DESC
+  `).all(userId);
+
+  return cartItems;
+}
+
+export function updateDeliveryOptionCartItems(
+    deliveryOption: number,
+    userId: number,
+    productId: number
+  ) {
+  if (![0, 1, 2].includes(deliveryOption)) {
+    throw new Error('Invalid delivery option');
+  }
+  db.prepare(`
+    UPDATE cart_items
+    SET delivery_option = ?
+    WHERE product_id = ?
+      AND cart_id IN (
+        SELECT id
+        FROM carts
+        WHERE id = cart_items.cart_id
+          AND user_id = ?
+      )
+  `).run(deliveryOption, productId, userId);
+}
+
+export function deleteCartItems(
+    userId: number,
+    cartId: number,
+    productId: number
+  ) {
+  db.prepare(`
+    DELETE FROM cart_items
+    WHERE cart_id = ? AND product_id = ?
+  `).run(cartId, productId);
+
+  const cartItem = db.prepare(`
+    SELECT id
+    FROM cart_items
+    WHERE cart_id = ?
+    LIMIT 1
+  `).get(cartId);
+
+  if (!cartItem) {
+    db.prepare(`
+      DELETE FROM carts
+      WHERE id = ? AND user_id = ?
+    `).run(cartId, userId);
+  }
 }

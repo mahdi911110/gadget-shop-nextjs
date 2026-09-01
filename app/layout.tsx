@@ -1,5 +1,6 @@
 import { Roboto } from 'next/font/google';
 import './globals.css';
+import { ToastContainer } from 'react-toastify';
 
 const roboto = Roboto({
   subsets: ['latin'],
@@ -7,10 +8,13 @@ const roboto = Roboto({
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <html>
-      <body className={roboto.className}>
-        {children}
-      </body>
-    </html>
+    <>
+      <ToastContainer />
+      <html>
+        <body className={roboto.className}>
+          {children}
+        </body>
+      </html>
+    </>
   );
 }

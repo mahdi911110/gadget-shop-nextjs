@@ -1,0 +1,22 @@
+'use server';
+
+import { getCurrentUser } from "@/lib/auth";
+import { deleteCartItems } from "@/lib/shopdb";
+import { revalidatePath } from "next/cache";
+
+export async function updateDeleteButton(
+    productId: number,
+    cartId: number,
+    prevState: null | { error: string },
+    formData: FormData
+  ) {
+  const user = await getCurrentUser();
+
+  console.log(user);
+
+  if (user) {
+    deleteCartItems(user.id, cartId, productId);
+  }
+
+  revalidatePath('/cart');
+}
