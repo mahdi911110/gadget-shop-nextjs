@@ -54,6 +54,11 @@
   padding: 5px 10px;
 }
 
+.orders-not-found {
+  color: red;
+  font-weight: bold;
+}
+
 @media (min-width: 769px) {
   .main {
     padding-top: 95px;
@@ -71,7 +76,8 @@
   
   .order-table-th,
   .box-header,
-  .header {
+  .header,
+  .orders-not-found {
     font-size: var(--th-font-size-mobile);
   }
 

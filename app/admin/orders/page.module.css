@@ -35,12 +35,18 @@
   display: flex;
 }
 
+.orders-not-found {
+  color: red;
+  font-weight: bold;
+}
+
 @media (max-width: 768px) {
   .main {
     padding-left: var(--padding-left);
   }
 
-  .product-table-th {
+  .product-table-th,
+  .orders-not-found {
     font-size: var(--th-font-size-mobile);
   }
 

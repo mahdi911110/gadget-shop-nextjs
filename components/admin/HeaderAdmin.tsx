@@ -13,7 +13,7 @@ export default function HeaderAdmin() {
       <div className={styles['admin-logout']}>
         <div className={styles['text-admin']}>Admin 👤</div>
         <form action={logoutAction}>
-					<button className={styles['button-logout']}>
+					<button className={styles['button-logout']} type='submit'>
 						Logout
 					</button>
         </form>

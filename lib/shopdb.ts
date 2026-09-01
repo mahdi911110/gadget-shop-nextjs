@@ -19,6 +19,7 @@ db.exec(`
     birthday TEXT NOT NULL,
     password_hash TEXT NOT NULL,
     created_at TEXT NOT NULL,
+    is_active INTEGER NOT NULL DEFAULT 1,
     role TEXT NOT NULL DEFAULT 'user'
   );
   
@@ -370,6 +371,7 @@ export function getUsers() {
       users.city,
       users.birthday,
       users.created_at,
+      users.is_active,
       COALESCE(SUM(order_items.quantity), 0) AS totalQuantity,
       COALESCE(SUM(order_items.price_cents * order_items.quantity), 0) AS totalSpent
     FROM users
@@ -478,8 +480,99 @@ export function deleteSessionFromDB(sessionId: string) {
   `).run(sessionId);
 }
 
-export function deleteUsersFromDB(userId: number) {
+export function handleUserActiveStatus(userId: number) {
+  const user = db.prepare(`
+    SELECT is_active FROM users WHERE id = ?
+  `).get(userId) as { is_active: number } | undefined;
+
+  if (!user) {
+    throw new Error('User not found');
+  }
+
+  const newIsActive = user.is_active ? 0 : 1;
+  
   db.prepare(`
-    DELETE FROM users WHERE id = ?
-  `).run(userId);
+    UPDATE users SET is_active = ? WHERE id = ?
+  `).run(newIsActive, userId);
+}
+
+export function migrateToDB() {
+  db.exec(`
+    ALTER TABLE users
+    ADD COLUMN is_active INTEGER NOT NULL DEFAULT 1;
+  `);
+}
+
+export function getUser(userId: number) {
+  const user = db.prepare(`
+    SELECT
+      users.username,
+      users.email,
+      users.created_at,
+      COALESCE(SUM(order_items.quantity), 0) AS totalQuantity,
+      COALESCE(SUM(order_items.price_cents * order_items.quantity), 0) AS totalSpent,
+      orders.id AS ordersId
+    FROM users
+    LEFT JOIN orders ON orders.user_id = users.id
+    LEFT JOIN order_items ON order_items.order_id = orders.id
+    WHERE users.id = ?
+    GROUP BY users.id
+    ORDER BY users.id DESC
+  `).get(userId);
+
+  return user;
+}
+
+export function getRecentOrders(numberOfOrders: number = 10,page: number = 1, offset: number = 0) {
+  if (numberOfOrders < 0) {
+    throw new Error('Number of orders must be more than 0');
+  } else if (page < 1) {
+    throw new Error('Page must be more than 0');
+  } else if (offset < 0) {
+    throw new Error('Offset must be more than 0');
+  }
+
+  if (page > 1) {
+    offset = 1;
+  }
+  
+  const recentOrders = db.prepare(`
+    SELECT
+      orders.id,
+      users.username,
+      order_items.price_cents,
+      orders.status,
+      orders.created_at
+    FROM orders
+    JOIN users ON orders.user_id = users.id
+    JOIN order_items ON order_items.order_id = orders.id
+    ORDER BY orders.created_at DESC
+    LIMIT ?
+  `).all(numberOfOrders);
+
+  return recentOrders;
+}
+
+export function getRecentOrder(userId: number, numberOfOrders: number = 10) {
+  const recentOrders = db.prepare(`
+    SELECT
+      orders.id,
+      order_items.price_cents,
+      orders.status
+    FROM orders
+    JOIN order_items ON order_items.order_id = orders.id
+    WHERE orders.user_id = ?
+    ORDER BY orders.created_at DESC
+    LIMIT ?
+  `).all(userId, numberOfOrders);
+
+  return recentOrders;
+}
+
+export function getOrdersCount() {
+  const orders = db.prepare(`
+    SELECT COUNT(*) AS count FROM order_items
+  `).get() as { count: number };
+
+  return orders.count;
 }

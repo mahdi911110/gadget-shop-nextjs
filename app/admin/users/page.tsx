@@ -1,8 +1,9 @@
 import { getUsers } from '@/lib/shopdb';
 import styles from './page.module.css';
 import Link from 'next/link';
+import handleUserStatus from './handleUserStatus';
 
-type UserType = {
+type UsersType = {
   id: number,
   username: string,
   email: string,
@@ -12,12 +13,13 @@ type UserType = {
   birthday: string,
   created_at: string,
   totalQuantity: number,
-  totalSpent: number
+  totalSpent: number,
+  is_active: number
 };
 
 export default function UsersPage() {
-  const users = getUsers() as UserType[];
-  
+  const users = getUsers() as UsersType[];
+
   return (
     <main className={styles.main}>
       <input className={styles['input-search']} type="text" placeholder='Search users...' />
@@ -60,10 +62,14 @@ export default function UsersPage() {
                 <td className={styles['product-table-td']}>{user.email}</td>
                 <td className={styles['product-table-td']}>{user.created_at}</td>
                 <td className={`${styles['product-table-td']} ${styles['product-table-actions']}`}>
-                  <Link className={styles.view} href="/admin/users/100">
+                  <Link className={styles.view} href={`/admin/users/${user.id}`}>
                     View
                   </Link>
-                  <span className={styles.delete}>Delete</span>
+                  <form action={handleUserStatus.bind(null, user.id)}>
+                  	<button className={user.is_active ? styles.inactive : `${styles.inactive} ${styles.active}`}>
+											{user.is_active ? 'Inactive' : 'active'}
+										</button>
+                  </form>
                 </td>
               </tr>
             ))}
