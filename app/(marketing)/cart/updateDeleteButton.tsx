@@ -12,8 +12,6 @@ export async function updateDeleteButton(
   ) {
   const user = await getCurrentUser();
 
-  console.log(user);
-
   if (user) {
     deleteCartItems(user.id, cartId, productId);
   }

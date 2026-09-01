@@ -636,7 +636,8 @@ export function getUserCart(userId: number) {
       products.product_name,
       cart_items.quantity,
       cart_items.delivery_option,
-      cart_items.id AS cartItemsId
+      carts.id AS cartId,
+      cart_items.id AS cartItemId
     FROM products
     JOIN cart_items ON cart_items.product_id = products.id
     JOIN carts ON carts.id = cart_items.cart_id
@@ -675,8 +676,14 @@ export function deleteCartItems(
   ) {
   db.prepare(`
     DELETE FROM cart_items
-    WHERE cart_id = ? AND product_id = ?
-  `).run(cartId, productId);
+    WHERE cart_id = ?
+      AND product_id = ?
+      AND cart_id IN (
+        SELECT id
+        FROM carts
+        WHERE user_id = ?
+      )
+  `).run(cartId, productId, userId);
 
   const cartItem = db.prepare(`
     SELECT id
@@ -692,3 +699,28 @@ export function deleteCartItems(
     `).run(cartId, userId);
   }
 }
+
+export function getTotalPriceCents(userId: number) {
+  const user = db.prepare(`
+    SELECT SUM(products.price_cents * cart_items.quantity) AS totalPriceCents
+    FROM cart_items
+    JOIN products ON products.id = cart_items.product_id
+    JOIN carts ON carts.id = cart_items.cart_id
+    WHERE carts.user_id = ?
+  `).get(userId) as { totalPriceCents: number | null } | undefined;
+
+  return user?.totalPriceCents ?? 0;
+}
+
+/* export function getDeliveryOptions(userId: number) {
+  const user = db.prepare(`
+    SELECT
+      cart_items.delivery_option
+    FROM products
+    JOIN cart_items ON cart_items.product_id = products.id
+    JOIN carts ON carts.id = cart_items.cart_id
+    WHERE carts.user_id = ?
+  `).all(userId);
+
+  return user;
+} */
