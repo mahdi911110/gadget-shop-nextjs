@@ -11,7 +11,7 @@ export default function Signup() {
   const [showPassword, setShowPassword] = useState(false);
 
   function handleShowPassword() {
-    setShowPassword(!showPassword);
+    setShowPassword(prev => !prev);
   }
 
   return (
@@ -116,7 +116,7 @@ export default function Signup() {
             className={styles.check}
             type="checkbox"
             onClick={handleShowPassword}
-          />{" "}
+          />
           Show password
         </div>
         {state?.error && <div className={styles.error}>{state.error}</div>}

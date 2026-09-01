@@ -7,6 +7,10 @@ import { redirect } from "next/navigation";
 export default async function loginAction(prevState: string | null, formData: FormData) {
   const emailOrUsername = String(formData.get('email'));
   const password = String(formData.get('password'));
+
+  if (!emailOrUsername || !password) {
+    return 'Fields must not be empty.';
+  }
   
   const result = await login(emailOrUsername, password);
 
