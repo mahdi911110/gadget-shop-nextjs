@@ -214,7 +214,7 @@ export function addProduct(
 }
 
 export const addToCart = db.transaction(
-  (user_id: number, product_id: number) => {
+  (user_id: number, product_id: number, quantity: number = 1) => {
   let cart = db.prepare(`
     SELECT id FROM carts WHERE user_id = ?
   `).get(user_id) as { id: number } | undefined;
@@ -230,38 +230,39 @@ export const addToCart = db.transaction(
   }
 
   const cartItem = db.prepare(`
-    SELECT id FROM cart_items WHERE cart_id = ? AND product_id = ?
+    SELECT id, quantity FROM cart_items WHERE cart_id = ? AND product_id = ?
   `).get(cart.id, product_id) as { id: number; quantity: number} | undefined;
 
-  const product = db.prepare(`
-    SELECT stock FROM products WHERE id = ?
-  `).get(product_id) as { stock: number } | undefined;
+  const stock = getStock(product_id);
 
-  if (!product) {
+  if (stock === undefined) {
     return { error: 'Product not found' };
   }
 
-  if (product.stock < 1) {
+  if (stock < 1) {
     return { error: 'Product is out of stock' };
   }
 
   if (cartItem) {
-    if (cartItem.quantity >= product.stock) {
+    if (cartItem.quantity + quantity > stock) {
       return { error: 'Not enough stock' };
     }
 
-    db.prepare(`
-      UPDATE cart_items SET quantity = quantity + 1 WHERE id = ?
-    `).run(cartItem.id);
+    handleQuantity(user_id, product_id, quantity);
   } else {
+    if (quantity > stock) {
+      return { error: 'Not enough stock' };
+    }
+
     db.prepare(`
       INSERT INTO cart_items (
         cart_id,
         product_id,
         quantity
       ) VALUES (?, ?, ?)
-    `).run(cart.id, product_id, 1);
+    `).run(cart.id, product_id, quantity);
   }
+
   return null;
 });
 
@@ -567,4 +568,46 @@ export function getOrdersCount() {
   `).get() as { count: number };
 
   return orders.count;
+}
+
+export function handleStock(productId: number, quantity: number) {
+  db.prepare(`
+    UPDATE products
+    SET stock = stock - ?
+    WHERE id = ?
+  `).run(quantity, productId);
+}
+
+export function getStock(productId: number) {
+  const product = db.prepare(`
+    SELECT stock FROM products WHERE id = ?
+  `).get(productId) as { stock: number} | undefined;
+
+  return product?.stock;
+}
+
+export function handleQuantity(userId: number, productId: number, quantity: number) { 
+  db.prepare(`
+   UPDATE cart_items
+    SET quantity = quantity + ?
+    WHERE product_id = ?
+      AND cart_id IN (
+        SELECT id
+        FROM carts
+        WHERE user_id = ?
+      )
+  `).run(quantity, productId, userId);
+}
+
+export function getQuantity(userId: number) {
+  const userProduct = db.prepare(`
+    SELECT
+      SUM(cart_items.quantity) AS totalQuantity
+    FROM cart_items
+    JOIN carts ON carts.id = cart_items.cart_id
+    JOIN users ON users.id = ?
+    GROUP BY users.id
+  `).get(userId) as { totalQuantity: number} | undefined;
+
+  return userProduct?.totalQuantity;
 }

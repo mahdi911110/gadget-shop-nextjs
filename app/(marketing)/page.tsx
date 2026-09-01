@@ -47,7 +47,7 @@ export default async function Home() {
             </div>
             <div className={styles['text-added']}>✓ Added</div>
             <div className={styles['card-button-container']}>
-              <Link href="/" className={styles['card-link-show']}>👁 View</Link>
+              <Link href={`/${product.id}`} className={styles['card-link-show']}>👁 View</Link>
               <AddToCartButton productId={product.id} />
             </div>
           </div>

@@ -4,10 +4,12 @@ import Link from "next/link";
 import NavLink from "./NavLink";
 import styles from "./Header.module.css";
 import { getCurrentUser } from "@/lib/auth";
+import { getQuantity } from "@/lib/shopdb";
 
 export default async function Header() {
   const user = await getCurrentUser();
   const widthHeight: number = 50;
+  const quantity = user ? getQuantity(user.id) ?? 0 : 0;
   return (
     <header className={styles.header}>
       <div className={styles["left-section"]}>
@@ -55,7 +57,7 @@ export default async function Header() {
               src="/icons/cart.svg"
               alt="Cart"
             />
-            <span className={styles["cart-count"]}>0</span>
+            <span className={styles["cart-count"]}>{quantity}</span>
           </div>
         </NavLink>
         {user ?
