@@ -117,6 +117,7 @@
 }
 
 .button-checkout {
+  width: 100%;
   border: none;
   border-radius: 10px;
   padding: 14px;
@@ -208,6 +209,10 @@
 .error {
   color: red;
   font-weight: bold;
+}
+
+.form-buttom {
+  width: 100%;
 }
 
 @media (min-width: 1001px) {

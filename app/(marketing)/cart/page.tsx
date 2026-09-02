@@ -6,6 +6,7 @@ import { getQuantity, getTotalPriceCents, getUserCart } from "@/lib/shopdb";
 import DeliveryOptions from "./DeliveryOptions";
 import ButtonSave from "./ButtonSave";
 import ButtonDelete from "./ButtonDelete";
+import ButtonCheckout from "./ButtonCheckout";
 
 type CartItems = {
   productId: number,
@@ -98,9 +99,7 @@ export default async function CartPage() {
           <div className={styles.text}>Order Total:</div>
           <div className={styles.pirce}>${(totalPriceCetsWithTax / 100).toFixed(2)}</div>
         </div>
-        <button className={styles["button-checkout"]}>
-          Proceed to Checkout
-        </button>
+        <ButtonCheckout />
       </div>
     </main>
   );

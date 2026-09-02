@@ -718,3 +718,73 @@ export function getTotalPriceCents(userId: number) {
 
   return user?.totalPriceCents ?? 0;
 }
+
+type CartItems = {
+  productId: number,
+  price_cents: number,
+  image_url: string,
+  product_name: string,
+  quantity: number,
+  delivery_option: number,
+  cartId: number,
+  cartItemsId: number
+};
+
+export const checkout = db.transaction((userId: number) => {
+  if (!userId) {
+    return { error: 'User ID not found.' };
+  }
+  
+  const userCart = getUserCart(userId) as CartItems[] | undefined;
+
+  if (!userCart || userCart.length === 0) {
+    return { notFound: 'No orders have been found.' };
+  }
+
+  for (const cart of userCart) {
+    const stock = getStock(cart.productId);
+
+    if (stock === undefined) {
+      return { error: 'Product not found.' };
+    }
+
+    if (stock < cart.quantity) {
+      return {
+        error: `Not enough stock for ${cart.product_name}.`,
+      };
+    }
+  }
+
+  const orders = db.prepare(`
+    INSERT INTO orders (
+      user_id,
+      created_at
+    ) VALUES (?, ?)
+  `).run(userId, dayjs().format('D MMMM YYYY'));
+  
+  const orderId = orders.lastInsertRowid;
+  
+  const orderItems = db.prepare(`
+    INSERT INTO order_items (
+      order_id,
+      product_id,
+      quantity,
+      price_cents,
+      delivery_option
+    ) VALUES (?, ?, ?, ?, ?)
+  `);
+
+  userCart.forEach((cart) => {
+    orderItems.run(
+      orderId,
+      cart.productId,
+      cart.quantity,
+      cart.price_cents,
+      cart.delivery_option
+    );
+    deleteCartItems(userId, cart.cartId, cart.productId);
+    handleStock(cart.productId, cart.quantity);
+  });
+
+  return null;
+});
