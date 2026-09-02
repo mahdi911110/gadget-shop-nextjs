@@ -54,16 +54,16 @@ db.exec(`
     user_id INTEGER NOT NULL,
     status TEXT NOT NULL DEFAULT 'pending',
     created_at TEXT NOT NULL,
-    delivery_option INTEGER NOT NULL DEFAULT 0 CHECK (delivery_option IN (0, 1, 2)),
     FOREIGN KEY (user_id) REFERENCES users(id)
-  );
-
-  CREATE TABLE IF NOT EXISTS order_items (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    order_id INTEGER NOT NULL,
-    product_id INTEGER NOT NULL,
-    quantity INTEGER NOT NULL CHECK (quantity >= 1),
-    price_cents INTEGER NOT NULL CHECK (price_cents >= 0),
+    );
+    
+    CREATE TABLE IF NOT EXISTS order_items (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      order_id INTEGER NOT NULL,
+      product_id INTEGER NOT NULL,
+      quantity INTEGER NOT NULL CHECK (quantity >= 1),
+      price_cents INTEGER NOT NULL CHECK (price_cents >= 0),
+      delivery_option INTEGER NOT NULL DEFAULT 0 CHECK (delivery_option IN (0, 1, 2)),
     UNIQUE (order_id, product_id),
     FOREIGN KEY (order_id) REFERENCES orders(id),
     FOREIGN KEY (product_id) REFERENCES products(id)
@@ -493,8 +493,15 @@ export function handleUserActiveStatus(userId: number) {
 
 export function migrateToDB() {
   db.exec(`
-    ALTER TABLE orders
+    ALTER TABLE order_items
     ADD COLUMN delivery_option INTEGER NOT NULL DEFAULT 0 CHECK (delivery_option IN (0, 1, 2));
+  `);
+}
+
+export function deleteFromDB() {
+  db.exec(`
+    ALTER TABLE orders
+    DROP COLUMN delivery_option;
   `);
 }
 
@@ -711,16 +718,3 @@ export function getTotalPriceCents(userId: number) {
 
   return user?.totalPriceCents ?? 0;
 }
-
-/* export function getDeliveryOptions(userId: number) {
-  const user = db.prepare(`
-    SELECT
-      cart_items.delivery_option
-    FROM products
-    JOIN cart_items ON cart_items.product_id = products.id
-    JOIN carts ON carts.id = cart_items.cart_id
-    WHERE carts.user_id = ?
-  `).all(userId);
-
-  return user;
-} */

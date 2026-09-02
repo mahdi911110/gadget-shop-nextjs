@@ -8,8 +8,17 @@ import { toast } from 'react-toastify';
 export default function ButtonSave({ quantity, productId }: { quantity: number, productId: number }) {
   const [state, formAction, isPending] = useActionState(updateSaveButton.bind(null, productId), null);
   const [isSave, setIsSave] = useState(false);
+  const [prevState, setPrevState] = useState(isPending);
+
   function handleIsSave() {
     setIsSave(prev => !prev);
+  }
+
+  if (isPending !== prevState) {
+    setPrevState(isPending);
+    if (state?.success) {
+      setIsSave(false);
+    }
   }
 
   useEffect(() => {
@@ -26,7 +35,8 @@ export default function ButtonSave({ quantity, productId }: { quantity: number, 
           type="number"
           min={1}
           name='quantity'
-          placeholder={`${quantity}`}
+          placeholder={'Enter quantity'}
+          defaultValue={quantity}
         />{" "}
         <button 
           className={styles["button-add"]}

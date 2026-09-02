@@ -48,7 +48,7 @@ export default async function CartPage() {
     <main className={styles.main}>
       <div className={styles["card-container"]}>
         {cartItems && cartItems?.map((cartItem) => (
-            <div key={cartItem.cartItemsId} className={styles.card}>
+            <div key={cartItem.productId} className={styles.card}>
               <div className={styles["card-img-container"]}>
                 <Image
                   className={styles["card-img"]}
