@@ -83,6 +83,10 @@
   font-size: 14px;
 }
 
+.order-text-quantity {
+  font-size: 12px;
+}
+
 .button-buy-again {
   display: flex;
   background-color: var(--primary-color);
@@ -90,6 +94,8 @@
   padding: 4px 7px;
   border-radius: 5px;
   cursor: pointer;
+  align-items: center;
+  gap: 3px;
   transition: transform 0.2s;
 }
 
@@ -112,6 +118,11 @@
 
 .deliver-text {
   color: gray;
+}
+
+.spiner-icon {
+  transform: rotate(180deg);
+  transition: transform 0.2s;
 }
 
 @media (max-width: 768px) {
@@ -145,13 +156,18 @@
     height: 50px;
   }
 
-  .order-text-title {
+  .order-text-title,
+  .order-text-quantity {
     font-size: 13px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 2;
     overflow: hidden;
     text-overflow: ellipsis;
+  }
+
+  .order-text-quantity {
+    font-size: 11px;
   }
 
   .order-date {

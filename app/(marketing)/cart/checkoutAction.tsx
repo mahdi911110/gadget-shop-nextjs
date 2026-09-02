@@ -3,6 +3,7 @@
 import { getCurrentUser } from "@/lib/auth";
 import { checkout } from "@/lib/shopdb";
 import { revalidatePath } from "next/cache";
+import { redirect } from "next/navigation";
 
 type PrevState =
   | { error: string }
@@ -22,6 +23,7 @@ export default async function checkoutAction(
 
   if (!result) {
     revalidatePath('/cart');
+    redirect('/orders');
   }
 
   return result;

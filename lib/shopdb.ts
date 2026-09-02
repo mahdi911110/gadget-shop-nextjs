@@ -788,3 +788,47 @@ export const checkout = db.transaction((userId: number) => {
 
   return null;
 });
+
+export function getUserOrders(userId: number) {
+  const orders = db.prepare(`
+    SELECT
+      id,
+      status,
+      created_at
+    FROM orders
+    WHERE user_id = ?
+    ORDER BY id DESC
+  `).all(userId);
+
+  return orders;
+}
+
+export function getUserOrderItems(userId: number, orderId: number) {
+  const orderItems = db.prepare(`
+    SELECT
+      order_items.id,
+      order_items.product_id,
+      order_items.quantity,
+      order_items.delivery_option,
+      products.product_name,
+      products.image_url
+    FROM order_items
+    JOIN orders ON orders.id = order_items.order_id
+    JOIN products ON products.id = order_items.product_id
+    WHERE order_items.order_id = ?
+      AND orders.user_id = ?
+  `).all(orderId, userId);
+  
+  return orderItems;
+}
+
+export function getTotalOrderPriceCents(orderId: number) {
+  const order = db.prepare(`
+    SELECT
+      SUM(price_cents * quantity) AS totalOrderAmount
+    FROM order_items
+    WHERE order_id = ?
+  `).get(orderId) as { totalOrderAmount: number } | null;
+
+  return order?.totalOrderAmount;
+}
