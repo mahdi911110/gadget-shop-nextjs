@@ -42,7 +42,7 @@ export default async function UserDetailPage({ params }: { params: Promise<{user
       </div>
       <div className={styles['container']}>
         <div className={styles.header}>Total Spent:</div>
-        <div className={styles.text}>${user.totalSpent}</div>
+        <div className={styles.text}>${(user.totalSpent / 100).toFixed(2)}</div>
       </div>
       <div className={styles['container']}>
         <div className={styles.header}>Recent Orders</div>

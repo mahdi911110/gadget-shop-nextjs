@@ -137,10 +137,17 @@
   gap: 10px;
 }
 
-.error {
+.error,
+.out-of-stock {
   display: flex;
   order: 2;
   font-weight: bold;
   color: red;
   align-items: center;
+}
+
+@media (max-width: 768px) {
+  .out-of-stock {
+    font-size: var(--th-font-size-mobile);
+  }
 }

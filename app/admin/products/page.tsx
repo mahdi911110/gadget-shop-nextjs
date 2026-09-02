@@ -60,9 +60,11 @@ export default function ProductsPage() {
                   <td className={styles['product-table-td']}>{product.product_name}</td>
                   <td className={styles['product-table-td']}>${product.price_cents / 100}</td>
                   <td className={styles['product-table-td']}>{product.stock}</td>
-                  <td className={`${styles['product-table-td']} ${styles['product-table-actions']}`}>
-                    <span className={styles.edit}>Edit</span>
-                    <span className={styles.delete}>Delete</span>
+                  <td className={styles['product-table-td']}>
+                    <div className={styles['product-table-actions']}>
+                      <span className={styles.edit}>Edit</span>
+                      <span className={styles.delete}>Delete</span>
+                    </div>
                   </td>
                 </tr>
               ))}

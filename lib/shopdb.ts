@@ -540,7 +540,7 @@ export function getRecentOrders(numberOfOrders: number = 10,page: number = 1, of
   
   const recentOrders = db.prepare(`
     SELECT
-      orders.id,
+      order_items.id,
       users.username,
       order_items.price_cents,
       orders.status,
@@ -548,7 +548,7 @@ export function getRecentOrders(numberOfOrders: number = 10,page: number = 1, of
     FROM orders
     JOIN users ON orders.user_id = users.id
     JOIN order_items ON order_items.order_id = orders.id
-    ORDER BY orders.created_at DESC
+    ORDER BY orders.id DESC
     LIMIT ?
   `).all(numberOfOrders);
 
@@ -558,13 +558,13 @@ export function getRecentOrders(numberOfOrders: number = 10,page: number = 1, of
 export function getRecentOrder(userId: number, numberOfOrders: number = 10) {
   const recentOrders = db.prepare(`
     SELECT
-      orders.id,
+      order_items.id,
       order_items.price_cents,
       orders.status
     FROM orders
     JOIN order_items ON order_items.order_id = orders.id
     WHERE orders.user_id = ?
-    ORDER BY orders.created_at DESC
+    ORDER BY orders.id DESC
     LIMIT ?
   `).all(userId, numberOfOrders);
 
@@ -831,4 +831,14 @@ export function getTotalOrderPriceCents(orderId: number) {
   `).get(orderId) as { totalOrderAmount: number } | null;
 
   return order?.totalOrderAmount;
+}
+
+export function getRevenue() {
+  const orders = db.prepare(`
+    SELECT
+      SUM(price_cents * quantity) AS revenue
+    FROM order_items
+  `).get() as { revenue: number } | null;
+
+  return orders?.revenue;
 }

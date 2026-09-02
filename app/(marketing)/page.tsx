@@ -48,7 +48,11 @@ export default async function Home() {
             <div className={styles['text-added']}>✓ Added</div>
             <div className={styles['card-button-container']}>
               <Link href={`/${product.id}`} className={styles['card-link-show']}>👁 View</Link>
-              <AddToCartButton productId={product.id} />
+              {product.stock > 0 ?
+                <AddToCartButton productId={product.id} />
+              :
+                <div className={styles['out-of-stock']}>Out of stock</div>
+              }
             </div>
           </div>
         </div>

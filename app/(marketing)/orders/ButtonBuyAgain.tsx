@@ -15,7 +15,7 @@ export default function ButtonBuyAgain({ productId }: {productId: number}) {
     if (state) {
       toast.error(state.error);
     }
-  });
+  }, [state]);
   
   return (
     <form

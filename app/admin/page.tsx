@@ -1,4 +1,4 @@
-import { getOrdersCount, getProductCount, getRecentOrders } from '@/lib/shopdb';
+import { getOrdersCount, getProductCount, getRecentOrders, getRevenue } from '@/lib/shopdb';
 import styles from './page.module.css';
 
 type RecentOrders = {
@@ -16,6 +16,8 @@ export default function AdminPage() {
 
   const ordersCount = getOrdersCount();
 
+  const revenue = ((getRevenue() ?? 0) / 100);
+
   return (
     <main className={styles.main}>
       <div className={styles.container}>
@@ -31,7 +33,7 @@ export default function AdminPage() {
           </div>
           <div className={styles['box-container']}>
             <div className={styles['box-header']}>Revenue</div>
-            <div className={styles['box-number']}>$12450</div>
+            <div className={styles['box-number']}>${revenue.toFixed(2)}</div>
           </div>
         </div>
       </div>
