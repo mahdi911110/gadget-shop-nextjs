@@ -1,15 +1,9 @@
 import Link from "next/link";
-import { getCurrentUser } from "@/lib/auth";
-import { redirect } from "next/navigation";
-
 import styles from '../auth.module.css';
+import userSession from "../userSession";
 
 export default async function Login() {
-  const user = await getCurrentUser();
-
-  if (user) {
-    redirect('/profile');
-  }
+  await userSession();
   
   return (
     <main className={styles.main}>

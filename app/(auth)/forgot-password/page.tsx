@@ -1,15 +1,10 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
-import { getCurrentUser } from "@/lib/auth";
 
 import styles from '../auth.module.css';
+import userSession from "../userSession";
 
 export default async function Forget() {
-  const user = await getCurrentUser();
-  
-  if (user) {
-    redirect('/profile');
-  }
+  await userSession();
 
   return (
     <main className={styles.main}>

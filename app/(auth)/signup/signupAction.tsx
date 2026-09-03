@@ -39,7 +39,7 @@ export default async function signupAction(prevState: PrevState | null, formData
     return { passwordError: 'Passwords not mach.' }
   }
 
-  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*]).{8,}$/;
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*\.]).{8,}$/;
   
   if (!passwordRegex.test(password)) {
     return {
