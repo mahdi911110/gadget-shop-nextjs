@@ -5,6 +5,7 @@ import NavLink from "./NavLink";
 import styles from "./Header.module.css";
 import { getCurrentUser } from "@/lib/auth";
 import { getQuantity } from "@/lib/shopdb";
+import SearchComponent from "./SearchComponent";
 
 export default async function Header() {
   const user = await getCurrentUser();
@@ -21,22 +22,7 @@ export default async function Header() {
         </div>
       </div>
       <div className={styles["middle-section"]}>
-        <div className={styles["search-box"]}>
-          <input
-            className={styles["search-input"]}
-            type="text"
-            placeholder="Search a product"
-          />
-          <button className={styles["search-button"]}>
-            <Image
-              className={styles["search-button-img"]}
-              width={35}
-              height={35}
-              src="/icons/search.svg"
-              alt="Search"
-            />
-          </button>
-        </div>
+        <SearchComponent />
       </div>
       <div className={styles["right-section"]}>
         <NavLink href="/orders" classCss={styles["order-link"]}>

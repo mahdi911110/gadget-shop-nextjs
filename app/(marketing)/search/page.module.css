@@ -1,0 +1,162 @@
+.result {
+  padding: 20px 20px 10px 20px;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  padding: 20px 30px;
+}
+
+.not-found {
+  font-weight: bold;
+  color: red;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 20px;
+  box-shadow: 0 2px 10px gray;
+  border-radius: 10px;
+  gap: 20px;
+}
+
+.image-container {
+  position: relative;
+  width: 100%;
+  height: 200px;
+}
+
+.card-img {
+  object-fit: contain;
+}
+
+.card-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+
+.card-title {
+  font-weight: bold;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.card-description {
+  font-size: 12px;
+  color: gray;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.rating {
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+}
+
+.card-count {
+  color: gray;
+}
+
+.card-money-container {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.card-money {
+  color: black;
+  font-weight: bold;
+}
+
+.card-discount {
+  color: gray;
+  font-weight: bold;
+  font-size: 12px;
+  text-decoration: line-through;
+}
+
+.text-added {
+  color: green;
+  font-weight: bold;
+  pointer-events: none;
+  opacity: 0;
+}
+
+.card-button-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: auto;
+}
+
+.card-link-show,
+.card-button-add {
+  cursor: pointer;
+}
+
+.card-link-show {
+  background-color: var(--view-color);
+  text-decoration: none;
+  color: black;
+  padding: 5px 10px;
+  border-radius: 10px;
+  transition: opacity 0.2s;
+}
+
+.card-link-show:hover {
+  opacity: 0.7;
+}
+
+.card-link-show:active {
+  opacity: 0.5;
+}
+
+.card-button-add {
+  background-color: var(--primary-color);
+  color: black;
+  border: none;
+  border-radius: 10px;
+  padding: 8px 10px;
+  transition: transform 0.2s;
+}
+
+.card-button-add:hover {
+  transform: scale(1.03);
+}
+
+.card-button-add:active {
+  transform: scale(1);
+}
+
+.error-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.error,
+.out-of-stock {
+  display: flex;
+  order: 2;
+  font-weight: bold;
+  color: red;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .out-of-stock {
+    font-size: var(--th-font-size-mobile);
+  }
+}

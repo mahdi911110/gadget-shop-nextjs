@@ -42,8 +42,8 @@ export default async function Home() {
               <div className={styles['card-count']}>(1523)</div>
             </div>
             <div className={styles['card-money-container']}>
-              <div className={styles['card-money']}>${(product.price_cents / 100) - 200}</div>
-              <div className={styles['card-discount']}>${product.price_cents / 100}</div>
+              <div className={styles['card-money']}>{product.stock > 0 ? `$${(product.price_cents / 100) - 200}` : ''}</div>
+              <div className={styles['card-discount']}>{product.stock > 0 ? `$${product.price_cents / 100}` : ''}</div>
             </div>
             <div className={styles['text-added']}>✓ Added</div>
             <div className={styles['card-button-container']}>
@@ -51,7 +51,7 @@ export default async function Home() {
               {product.stock > 0 ?
                 <AddToCartButton productId={product.id} />
               :
-                <div className={styles['out-of-stock']}>Out of stock</div>
+                <div className={styles['out-of-stock']}>📦 Out of stock</div>
               }
             </div>
           </div>

@@ -842,3 +842,24 @@ export function getRevenue() {
 
   return orders?.revenue;
 }
+
+export function searchProducts(productNameOrCategory: string) {
+  const products = db.prepare(`
+    SELECT
+      id,
+      product_name,
+      price_cents,
+      stock,
+      category,
+      description,
+      image_url
+    FROM products
+    WHERE product_name LIKE ? OR category LIKE ?
+  `).all(`%${productNameOrCategory}%`, `%${productNameOrCategory}%`);
+
+  if (products === null || products === undefined) {
+    return { error: 'Could not found the product.' };
+  }
+
+  return products;
+}
