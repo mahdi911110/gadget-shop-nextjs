@@ -1,6 +1,6 @@
 "use client";
 
-import { useActionState } from "react";
+import { useFormStatus } from "react-dom";
 import styles from "./page.module.css";
 import { updateDeleteButton } from "./updateDeleteButton";
 
@@ -11,18 +11,15 @@ export default function ButtonDelete({
   productId: number;
   cartId: number;
 }) {
-  const [state, formAction, isPending] = useActionState(
-    updateDeleteButton.bind(null, productId, cartId),
-    null,
-  );
+  const { pending } = useFormStatus();
   return (
-    <form action={formAction}>
+    <form action={updateDeleteButton.bind(null, productId, cartId)}>
       <button
         className={styles["button-delete"]}
         type="submit"
-        disabled={isPending}
+        disabled={pending}
       >
-        {isPending ? "Deleting..." : "Delete"}
+        {pending ? "Deleting..." : "Delete"}
       </button>
     </form>
   );

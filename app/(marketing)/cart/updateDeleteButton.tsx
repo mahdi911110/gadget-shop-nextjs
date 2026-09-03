@@ -6,9 +6,7 @@ import { revalidatePath } from "next/cache";
 
 export async function updateDeleteButton(
     productId: number,
-    cartId: number,
-    prevState: null | { error: string },
-    formData: FormData
+    cartId: number
   ) {
   const user = await getCurrentUser();
 

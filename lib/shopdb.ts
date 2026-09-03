@@ -738,7 +738,7 @@ export const checkout = db.transaction((userId: number) => {
   const userCart = getUserCart(userId) as CartItems[] | undefined;
 
   if (!userCart || userCart.length === 0) {
-    return { notFound: 'No orders have been found.' };
+    return { notFound: 'No cart have been found.' };
   }
 
   for (const cart of userCart) {
