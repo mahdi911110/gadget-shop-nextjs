@@ -1,5 +1,5 @@
 import styles from './SidebarAdmin.module.css';
-import NavLink from '../header/NavLink';
+import NavLink from '../marketing/header/NavLink';
 
 export default function SidebarAdmin() {
   return (

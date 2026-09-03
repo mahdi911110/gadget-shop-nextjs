@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState, useEffect } from 'react';
-import styles from './page.module.css';
+import styles from './AddToCartButton.module.css';
 import addtoCartAction from './addToCartAction';
 import { toast } from 'react-toastify';
 

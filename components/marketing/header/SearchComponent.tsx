@@ -3,7 +3,7 @@
 import { useState, type ChangeEvent, type KeyboardEvent } from "react";
 import { useRouter } from "next/navigation";
 
-import styles from "./Header.module.css";
+import styles from "./SearchComponent.module.css";
 import Image from "next/image";
 
 export default function SearchComponent() {
