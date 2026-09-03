@@ -9,7 +9,7 @@ import SearchComponent from "./SearchComponent";
 
 export default async function Header() {
   const user = await getCurrentUser();
-  const widthHeight: number = 50;
+  const widthHeight = 50;
   const quantity = user ? getQuantity(user.id) ?? 0 : 0;
   return (
     <header className={styles.header}>
