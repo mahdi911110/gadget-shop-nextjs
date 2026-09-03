@@ -1,7 +1,7 @@
 'use server';
 
 import { getCurrentUser } from "@/lib/auth";
-import { handleSetQuantity } from "@/lib/shopdb";
+import { getStock, handleSetQuantity } from "@/lib/shopdb";
 import { revalidatePath } from "next/cache";
 
 type State =
@@ -22,6 +22,16 @@ export default async function updateSaveButton(productId: number, prevState: Sta
 
   if (!Number.isInteger(quantity) || quantity < 1) {
     return { error: 'Quantity must be at least 1.' };
+  }
+
+  const stock = getStock(productId);
+
+  if (stock === undefined) {
+    return { error: 'Could not find the product.' };
+  }
+
+  if (stock < quantity) {
+    return { error: 'Not enough products in stock.' };
   }
 
   handleSetQuantity(user.id, productId, quantity);
