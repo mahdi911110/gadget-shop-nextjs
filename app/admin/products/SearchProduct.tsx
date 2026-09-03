@@ -1,16 +1,16 @@
 'use client';
 
-import { redirect } from 'next/navigation';
-import styles from './SearchComponent.module.css';
-
 import { type ChangeEvent, type KeyboardEvent, useState } from 'react';
+import styles from './SearchProduct.module.css';
+import { redirect } from 'next/navigation';
 
-export default function SearchComponent() {
+export default function SearchProduct() {
   const [searchText, setSearchText] = useState('');
+
   function handleSearchText(event: ChangeEvent<HTMLInputElement>) {
     setSearchText(event.target.value);
   }
-  
+
   function handleSearchOnKeyDown(event: KeyboardEvent<HTMLInputElement>) {
     if (event.key === 'Enter') {
       search();
@@ -25,16 +25,16 @@ export default function SearchComponent() {
     if (searchText.trim() === '') {
       return;
     }
-    redirect(`/admin/orders/search?q=${searchText}`);
+    redirect(`/admin/products/search?q=${searchText}`);
   }
 
   return (
     <input
       className={styles["input-search"]}
       type="text"
-      placeholder="Search orders..."
-      onChange={handleSearchText}
+      placeholder="Search products..."
       value={searchText}
+      onChange={handleSearchText}
       onKeyDown={handleSearchOnKeyDown}
     />
   );
