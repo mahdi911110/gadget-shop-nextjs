@@ -1,10 +1,10 @@
 import Link from "next/link";
 
 import styles from '../auth.module.css';
-import userSession from "../userSession";
+import redirectByRole from "@/lib/redirectByRole";
 
 export default async function Forget() {
-  await userSession();
+  await redirectByRole();
 
   return (
     <main className={styles.main}>

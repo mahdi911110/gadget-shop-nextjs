@@ -1,18 +1,16 @@
 import { getCurrentUser } from '@/lib/auth';
 import { redirect } from 'next/navigation';
 
-export default async function userSession() {
+export default async function redirectByRole() {
   const user = await getCurrentUser();
 
   if (!user) {
     redirect('/login');
   }
 
-  if (user) {
-    if (user.role === 'admin') {
-      redirect('/admin');
-    } else {
-      redirect('/profile');
-    }
+  if (user.role === 'admin') {
+    redirect('/admin');
   }
+  
+  redirect('/profile');
 }

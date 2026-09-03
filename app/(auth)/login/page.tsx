@@ -1,9 +1,9 @@
 import styles from "../auth.module.css";
-import userSession from "../userSession";
 import LoginForm from "./LoginForm";
+import redirectByRole from "@/lib/redirectByRole";
 
 export default async function LoginPage() {
-  await userSession();
+  await redirectByRole();
   return (
     <main className={styles.main}>
       <LoginForm />
