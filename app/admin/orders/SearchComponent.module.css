@@ -1,0 +1,10 @@
+.input-search {
+  border: 1px solid gray;
+  padding: 10px 15px;
+  border-radius: 10px;
+}
+
+.input-search:focus {
+  outline-offset: -1px;
+  outline-color: var(--primary-color);
+}

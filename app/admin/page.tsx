@@ -4,7 +4,7 @@ import styles from './page.module.css';
 type RecentOrders = {
   id: number,
   username: string,
-  price_cents: number,
+  totalAmount: number,
   status: string,
   created_at: string
 };
@@ -59,7 +59,7 @@ export default function AdminPage() {
                   <tr key={order.id}>
                     <td className={styles['order-table-td']}>{order.id}</td>
                     <td className={styles['order-table-td']}>{order.username}</td>
-                    <td className={styles['order-table-td']}>${order.price_cents / 100}</td>
+                    <td className={styles['order-table-td']}>${order.totalAmount / 100}</td>
                     <td className={styles['order-table-td']}>{order.status}</td>
                   </tr>
                 ))}

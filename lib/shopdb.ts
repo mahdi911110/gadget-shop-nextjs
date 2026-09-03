@@ -525,32 +525,29 @@ export function getUser(userId: number) {
   return user;
 }
 
-export function getRecentOrders(numberOfOrders: number = 10,page: number = 1, offset: number = 0) {
-  if (numberOfOrders < 0) {
+export function getRecentOrders(limit: number = 10, page: number = 1) {
+  if (limit < 0) {
     throw new Error('Number of orders must be more than 0');
   } else if (page < 1) {
     throw new Error('Page must be more than 0');
-  } else if (offset < 0) {
-    throw new Error('Offset must be more than 0');
   }
 
-  if (page > 1) {
-    offset = 1;
-  }
+  const offset = (page - 1) * limit;
   
   const recentOrders = db.prepare(`
     SELECT
-      order_items.id,
+      orders.id,
       users.username,
-      order_items.price_cents,
+      SUM(order_items.price_cents * order_items.quantity) AS totalAmount,
       orders.status,
       orders.created_at
     FROM orders
     JOIN users ON orders.user_id = users.id
     JOIN order_items ON order_items.order_id = orders.id
+    GROUP BY orders.id
     ORDER BY orders.id DESC
-    LIMIT ?
-  `).all(numberOfOrders);
+    LIMIT ? OFFSET ?
+  `).all(limit, offset);
 
   return recentOrders;
 }
@@ -569,6 +566,61 @@ export function getRecentOrder(userId: number, numberOfOrders: number = 10) {
   `).all(userId, numberOfOrders);
 
   return recentOrders;
+}
+
+export function getOrderItems(orderId: number) {
+  const orderItem = db.prepare(`
+    SELECT
+      id,
+      order_id,
+      product_id,
+      quantity,
+      price_cents,
+      delivery_option
+    FROM order_items
+    WHERE order_id = ?
+  `).all(orderId);
+
+  return orderItem;
+}
+
+export function getCreatedAt(orderId: number) {
+  const orderItem = db.prepare(`
+    SELECT
+      created_at
+    FROM orders
+    WHERE orders.id = ?
+  `).get(orderId) as { created_at: string } | undefined;
+
+  return orderItem?.created_at;
+}
+
+export function searchOrders(searchText: string, limit: number = 10, page: number = 1) {
+  if (limit < 0) {
+    throw new Error('Number of orders must be more than 0');
+  } else if (page < 1) {
+    throw new Error('Page must be more than 0');
+  }
+
+  const offset = (page - 1) * limit;
+  
+  const resultOrders = db.prepare(`
+    SELECT
+      orders.id,
+      users.username,
+      SUM(order_items.price_cents * order_items.quantity) AS totalAmount,
+      orders.status,
+      orders.created_at
+    FROM orders
+    JOIN users ON orders.user_id = users.id
+    JOIN order_items ON order_items.order_id = orders.id
+    WHERE CAST(orders.id AS TEXT) LIKE ? OR users.username LIKE ?
+    GROUP BY orders.id
+    ORDER BY orders.id DESC
+    LIMIT ? OFFSET ?
+  `).all(`%${searchText}%`, `%${searchText}%`, limit, offset);
+
+  return resultOrders;
 }
 
 export function getOrdersCount() {
