@@ -1,0 +1,104 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+  border-bottom: 1px solid gray;
+}
+
+.main-logo-link {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.text-gadget {
+  color: black;
+  background-color: var(--primary-color);
+  padding-right: 4px;
+  font-weight: bold;
+}
+
+.text-shop {
+  color: var(--primary-color);
+  background-color: black;
+  padding-left: 4px;
+  font-weight: bold;
+}
+
+.admin-logout {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.text-admin {
+  font-weight: bold;
+}
+
+.button-logout {
+  height: 100%;
+  padding: 0 10px;
+  cursor: pointer;
+  border: none;
+  background-color: black;
+  color: white;
+}
+
+@media (min-width: 769px) {
+  .header {
+    height: 80px;
+    padding-top: 20px;
+  }
+
+  .text-gadget {
+    padding: 10px;
+    padding-left: 15px;
+  }
+  
+  .text-shop {
+    padding: 10px;
+    padding-right: 15px;
+  }
+
+  .text-admin {
+    display: flex;
+    height: 100%;
+    align-items: center;
+  }
+
+  .button-logout {
+    height: 39.33px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    height: 44px;
+    padding-top: 15px;
+  }
+
+  .text-gadget {
+    padding: 5px;
+    padding-left: 12px;
+    font-size: 15px;
+  }
+
+  .text-shop {
+    padding: 5px;
+    padding-right: 12px;
+    font-size: 15px;
+  }
+
+  .admin-logout {
+    gap: 7px;
+  }
+
+  .button-logout {
+    height: 28px;
+  }
+}
