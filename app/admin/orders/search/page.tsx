@@ -1,5 +1,5 @@
 import { searchOrders } from "@/lib/shopdb";
-import OrdersComponent from "../OrdersComponent";
+import OrdersComponent from "@/app/admin/orders/OrdersComponent";
 
 type RecentOrders = {
   id: number;

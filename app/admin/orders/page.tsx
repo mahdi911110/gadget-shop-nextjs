@@ -1,4 +1,4 @@
-import OrdersComponent from "./OrdersComponent";
+import OrdersComponent from "@/app/admin/orders/OrdersComponent";
 import { getRecentOrders } from "@/lib/shopdb";
 
 type RecentOrders = {

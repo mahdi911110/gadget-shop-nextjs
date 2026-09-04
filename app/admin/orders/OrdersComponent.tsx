@@ -1,5 +1,5 @@
 import Link from "next/link";
-import SearchComponent from "./SearchComponent";
+import SearchComponent from "@/app/admin/orders/SearchComponent";
 
 import styles from "./OrdersComponent.module.css";
 

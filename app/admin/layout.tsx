@@ -1,5 +1,5 @@
-import HeaderAdmin from '@/components/admin/HeaderAdmin';
-import SidebarAdmin from '@/components/admin/SidebarAdmin';
+import HeaderAdmin from '@/components/admin/header/HeaderAdmin';
+import SidebarAdmin from '@/components/admin/sidebar/SidebarAdmin';
 import { getCurrentUser } from '@/lib/auth';
 
 import '../globals.css';

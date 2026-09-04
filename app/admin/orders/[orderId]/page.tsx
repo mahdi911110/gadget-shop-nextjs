@@ -1,6 +1,7 @@
 import { getCreatedAt, getOrderItems } from "@/lib/shopdb";
 import styles from './page.module.css';
 import dayjs from "dayjs";
+import SearchComponent from "../SearchComponent";
 
 type OrderItem = {
   id: number,
@@ -63,11 +64,7 @@ export default async function OrderPage({ params }: { params: Promise<{orderId: 
         </div>
       ) : (
         <>
-          <input
-            className={styles["input-search"]}
-            type="text"
-            placeholder="Search orders..."
-          />
+          <SearchComponent />
           <div className={styles["table-container"]}>
             <table className={styles.table}>
               <thead>

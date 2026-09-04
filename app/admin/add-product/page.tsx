@@ -2,10 +2,18 @@
 
 import styles from "./page.module.css";
 import addProductAction from "./ActionProductForm";
-import { useActionState } from "react";
+import { useActionState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 export default function AddProduct() {
   const [state, formAction, isPending] = useActionState(addProductAction, null);
+  
+  useEffect(() => {
+    if (state) {
+      toast.error(state.error);
+    }
+  });
+  
   return (
     <main className={styles.main}>
       <form className={styles.card} action={formAction}>
