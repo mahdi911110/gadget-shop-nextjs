@@ -215,6 +215,83 @@ export function addProduct(
   );
 }
 
+export function editProduct(
+  productId: number,
+  productName: string,
+  priceCents: number,
+  stock: number,
+  category: string,
+  description: string,
+  imageUrl: string = ''
+) {
+  if (
+    !productId ||
+    productName.trim() === '' ||
+    !Number.isInteger(priceCents) || priceCents < 0 ||
+    !Number.isInteger(stock) || stock < 0 ||
+    category.trim() === '' ||
+    description.trim() === ''
+  ) {
+    return { error: 'Invalid input error happend.' };
+  }
+  
+  let result;
+  
+  if (imageUrl === '') {
+    result = db.prepare(`
+      UPDATE products
+      SET
+        product_name = ?,
+        price_cents = ?,
+        stock = ?,
+        category = ?,
+        description = ?
+      WHERE id = ?
+    `).run(
+      productName,
+      priceCents,
+      stock,
+      category,
+      description,
+      productId
+    );
+  } else {
+    result = db.prepare(`
+      UPDATE products
+      SET
+        product_name = ?,
+        price_cents = ?,
+        stock = ?,
+        category = ?,
+        description = ?,
+        image_url = ?
+      WHERE id = ?
+    `).run(
+      productName,
+      priceCents,
+      stock,
+      category,
+      description,
+      imageUrl,
+      productId
+    );
+  }
+
+  if (result.changes === 0) {
+    return { error: 'Product not found.' };
+  }
+
+  return { success: true };
+}
+
+export function getProduct(productId: number) {
+  const product = db.prepare(`
+    SELECT * FROM products WHERE id = ?
+  `).get(productId);
+
+  return product;
+}
+
 export const addToCart = db.transaction(
   (user_id: number, product_id: number, quantity: number = 1) => {
   let cart = db.prepare(`

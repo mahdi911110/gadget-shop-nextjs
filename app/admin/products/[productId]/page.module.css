@@ -1,0 +1,19 @@
+.main {
+  padding-left: 140px;
+  width: 100%;
+  padding-top: 40px;
+}
+
+.not-found {
+  color: red;
+  font-weight: bold;
+  padding-top: 100px;
+  padding-left: 160px;
+}
+
+@media (max-width: 768px) {
+  .not-found {
+    padding-top: 60px;
+    padding-left: 65px;
+  }
+}

@@ -1,13 +1,31 @@
 'use client';
 
-import styles from "./page.module.css";
-import addProductAction from "./ActionProductForm";
 import { useActionState, useEffect, useRef, useState } from "react";
+import styles from "./EditForm.module.css";
+
+import saveAction from "./saveAction";
 import { toast } from "react-toastify";
+import Link from "next/link";
 import Image from "next/image";
 
-export default function AddProduct() {
-  const [state, formAction, isPending] = useActionState(addProductAction, null);
+type ProductType = {
+  id: number,
+  product_name: string,
+  price_cents: number,
+  stock: number,
+  category: string,
+  description: string,
+  image_url: string
+}
+
+export default function EditForm({ product }: { product: ProductType }) {
+  const [state, formAction, isPending] = useActionState(
+    saveAction.bind(
+      null,
+      product.id
+    ),
+    null
+  );
 
   const inputFileRef = useRef<HTMLInputElement>(null);
   const [preview, setPreview] = useState<string | null>(null);
@@ -20,15 +38,16 @@ export default function AddProduct() {
       setPreview(imageUrl);
     }
   }
-  
+
   useEffect(() => {
-    if (state) {
+    if (state?.error) {
       toast.error(state.error);
     }
-  });
-  
+  }, [state]);
+
   return (
     <main className={styles.main}>
+      <div className={styles['form-header']}>Edit Product With ID: {product.id}</div>
       <form className={styles.card} action={formAction}>
         <div className={styles["card-container"]}>
           <label className={styles["card-title"]}>Product Name</label>
@@ -36,6 +55,7 @@ export default function AddProduct() {
             className={styles["card-input"]}
             name="name"
             type="text"
+            defaultValue={product.product_name}
             placeholder="Product name"
             required
           />
@@ -48,6 +68,7 @@ export default function AddProduct() {
             type="number"
             min="1"
             step="0.01"
+            defaultValue={product.price_cents / 100}
             placeholder="Price"
             required
           />
@@ -59,7 +80,7 @@ export default function AddProduct() {
             name="stock"
             type="number"
             min="0"
-            defaultValue="1"
+            defaultValue={product.stock}
             placeholder="Stock"
             required
           />
@@ -70,6 +91,7 @@ export default function AddProduct() {
             className={styles["card-input"]}
             name="category"
             type="text"
+            defaultValue={product.category}
             placeholder="Category name"
             required
           />
@@ -79,6 +101,7 @@ export default function AddProduct() {
           <textarea
             className={styles["card-description"]}
             name="description"
+            defaultValue={product.description}
             placeholder="Write a description for product"
             required
           ></textarea>
@@ -92,8 +115,8 @@ export default function AddProduct() {
               onClick={() => inputFileRef.current?.click()}
             >
               <Image
-                src={preview ? preview : '/images/upload.svg'}
-                alt={preview ? 'Preview' : 'Upload image'}
+                src={preview ? preview : product.image_url}
+                alt={preview ? 'Preview' : product.product_name}
                 width={100}
                 height={100}
                 />
@@ -109,11 +132,14 @@ export default function AddProduct() {
           </div>
         </div>
         <div className={styles["card-button-container"]}>
+          <Link className={styles.back} href="/admin/products">
+            Back
+          </Link>
           <button className={styles["button-reset"]} type="reset">
             Reset
           </button>
           <button className={isPending ? `${styles["button-add"]} loading` : styles["button-add"]} type="submit" disabled={isPending}>
-            {isPending ? 'Adding...' : 'Add'}
+            {isPending ? 'Saveing...' : 'Save'}
           </button>
         </div>
       </form>
