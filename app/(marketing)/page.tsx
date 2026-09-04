@@ -12,14 +12,31 @@ type ProductType = {
   image_url: string
 }
 
-export default async function Home() {
-  const products = getProducts() as ProductType[];
+export default async function Home({
+  searchParams
+}: {
+  searchParams: Promise<{
+    search?: string
+  }>
+}) {
+  const { search } = await searchParams;
+  let newSearch = '';
+  if (search !== undefined) {
+    newSearch = search.trim();
+  }
+  const products = getProducts(newSearch) as ProductType[];
   
   return (
     <main className={styles.main}>
-      {products.map(product => (
-        <CardComponent key={product.id} product={product} />
-      ))}
+      {products.length > 0 ?
+        products.map(product => (
+          <CardComponent key={product.id} product={product} />
+        ))
+      :
+        <div className={styles['not-found']}>
+          {newSearch === '' ? '📭' : '🔍'} No products have been found.
+        </div>
+      }
     </main>
   );
 }

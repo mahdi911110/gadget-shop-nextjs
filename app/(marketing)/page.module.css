@@ -5,10 +5,7 @@
   padding: 20px 30px;
 }
 
-.error {
-  display: flex;
-  order: 2;
+.not-found {
   font-weight: bold;
   color: red;
-  align-items: center;
 }

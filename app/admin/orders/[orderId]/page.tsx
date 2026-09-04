@@ -52,15 +52,11 @@ export default async function OrderPage({ params }: { params: Promise<{orderId: 
 
   const createdAt = getCreatedAt(Number(orderId));
 
-  if (!createdAt) {
-    return <div>Order not found</div>
-  }
-
   return (
     <main className={styles.main}>
-      {order.length === 0 ? (
+      {order.length === 0 || order === undefined || !createdAt ? (
         <div className={styles["orders-not-found"]}>
-          No recent orders have been found.
+          ⚠️ No recent orders have been found.
         </div>
       ) : (
         <>

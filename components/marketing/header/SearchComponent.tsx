@@ -1,14 +1,13 @@
 "use client";
 
 import { useState, type ChangeEvent, type KeyboardEvent } from "react";
-import { useRouter } from "next/navigation";
 
 import styles from "./SearchComponent.module.css";
 import Image from "next/image";
+import { redirect } from "next/navigation";
 
 export default function SearchComponent() {
   const [searchText, setSearchText] = useState("");
-  const router = useRouter();
 
   function handleSearchText(event: ChangeEvent<HTMLInputElement>) {
     setSearchText(event.target.value);
@@ -16,12 +15,10 @@ export default function SearchComponent() {
 
   function handleSearchButton() {
     if (searchText.trim() === "") {
-      router.push("/");
-      return;
+      redirect('/');
     }
 
-    router.push(`/search?q=${searchText.trim()}`);
-    setSearchText("");
+    redirect(`/?search=${searchText.trim()}`);
   }
 
   function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {

@@ -8,3 +8,9 @@
   outline-offset: -1px;
   outline-color: var(--primary-color);
 }
+
+@media (max-width: 768px) {
+  .input-search {
+    padding: 5px 10px;
+  }
+}

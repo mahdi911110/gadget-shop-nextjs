@@ -23,9 +23,9 @@ export default function SearchComponent() {
 
   function search() {
     if (searchText.trim() === '') {
-      return;
+      redirect('/admin/orders');
     }
-    redirect(`/admin/orders/search?q=${searchText}`);
+    redirect(`/admin/orders?search=${searchText}`);
   }
 
   return (

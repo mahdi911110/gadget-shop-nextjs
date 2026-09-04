@@ -21,9 +21,15 @@ export default async function OrdersPage() {
         <div className={styles['main-title']}>My Orders</div>
         <div className={styles['main-text']}>view your order history and tracking details</div>
       </div>
-      {userOrders && userOrders.map(orders => (
-        <OrdersContainer key={orders.id} orders={orders} />
-      ))}
+      {!userOrders || userOrders.length === 0 ?
+        <div className={styles['not-found']}>
+          {"📭 You don't have any orders."}
+        </div>
+      :
+        userOrders.map(orders => (
+          <OrdersContainer key={orders.id} orders={orders} />
+        ))
+      }
     </main>
   );
 }

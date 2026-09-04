@@ -65,12 +65,19 @@
   background-color: green;
 }
 
+.not-found {
+  font-weight: bold;
+  color: red;
+}
+
 @media (max-width: 768px) {
   .main {
     padding-left: var(--padding-left);
+    gap: 20px;
   }
 
-  .product-table-th {
+  .product-table-th,
+  .not-found {
     font-size: var(--th-font-size-mobile);
   }
 

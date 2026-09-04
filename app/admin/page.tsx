@@ -43,7 +43,7 @@ export default function AdminPage() {
         <div className={styles['table-container']}>
           {recentOrders.length === 0 ? (
             <div className={styles["orders-not-found"]}>
-              No recent orders have been found.
+              📭 No recent orders have been found.
             </div>
           ) : (
             <table className={styles['order-table']}>

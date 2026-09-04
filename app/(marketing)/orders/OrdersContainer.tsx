@@ -27,29 +27,35 @@ export default async function OrdersContainer({ orders }: { orders: UserOrders }
   const totalOrderAmount = (getTotalOrderPriceCents(orders.id) ?? 0) / 100;
   return (
     <div className={styles['orders-container']}>
-      <div  className={styles['order-container']}>
-        <div className={styles['order-title-container']}>
-          <div className={styles['order-title']}>
-            <div className={styles['order-main-text']}>Order Id</div>
-            <div className={styles['order-detail-text']}>{orders.id}</div>
-          </div>
-          <div className={styles['order-title']}>
-            <div className={styles['order-main-text']}>Order Date</div>
-            <div className={styles['order-detail-text']}>{orders.created_at}</div>
-          </div>
-          <div className={styles['order-title']}>
-            <div className={styles['order-main-text']}>Total Amount</div>
-            <div className={styles['order-detail-text']}>${totalOrderAmount.toFixed(2)}</div>
-          </div>
+      {orderItems === undefined || orderItems.length === 0 ?
+        <div className={styles['not-found']}>
+          📭 No order have been found.
         </div>
-        {orderItems?.map(orderItem => (
-          <OrderContainer
-            key={orderItem.id}
-            orderItem={orderItem}
-            createdAt={orders.created_at}
-          />
-        ))}
-      </div>
+      :
+        <div  className={styles['order-container']}>
+          <div className={styles['order-title-container']}>
+            <div className={styles['order-title']}>
+              <div className={styles['order-main-text']}>Order Id</div>
+              <div className={styles['order-detail-text']}>{orders.id}</div>
+            </div>
+            <div className={styles['order-title']}>
+              <div className={styles['order-main-text']}>Order Date</div>
+              <div className={styles['order-detail-text']}>{orders.created_at}</div>
+            </div>
+            <div className={styles['order-title']}>
+              <div className={styles['order-main-text']}>Total Amount</div>
+              <div className={styles['order-detail-text']}>${totalOrderAmount.toFixed(2)}</div>
+            </div>
+          </div>
+          {orderItems?.map(orderItem => (
+            <OrderContainer
+              key={orderItem.id}
+              orderItem={orderItem}
+              createdAt={orders.created_at}
+            />
+          ))}
+        </div>
+      }
     </div>
   );
 }

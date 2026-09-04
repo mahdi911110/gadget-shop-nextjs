@@ -215,6 +215,11 @@
   width: 100%;
 }
 
+.not-found {
+  font-weight: bold;
+  color: red;
+}
+
 @media (min-width: 1001px) {
   .main {
     padding: 30px 80px;

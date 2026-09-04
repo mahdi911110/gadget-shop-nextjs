@@ -353,12 +353,25 @@ export function getLastPage(limit: number) {
   return totalPages;
 }
 
-export function getProducts(page: number = 1, limit: number = 20) {
+export function getProducts(searchProduct: string = '', page: number = 1, limit: number = 20) {
   const offset = (page - 1) * limit;
 
+  const searchValue = `%${searchProduct}%`;
+
   const products = db.prepare(`
-    SELECT * FROM products ORDER BY id LIMIT ? OFFSET ?
-  `).all(limit, offset);
+    SELECT
+      *
+    FROM products
+    WHERE CAST(id AS TEXT) LIKE ? OR product_name LIKE ? OR category LIKE ?
+    ORDER BY id
+    LIMIT ? OFFSET ?
+  `).all(
+    searchValue,
+    searchValue,
+    searchValue,
+    limit,
+    offset
+  );
 
   return products;
 }
@@ -527,7 +540,12 @@ export function getUser(userId: number) {
   return user;
 }
 
-export function getRecentOrders(limit: number = 10, page: number = 1) {
+export function getRecentOrders(
+  searchText: string = '',
+  userOnly: boolean = false,
+  limit: number = 10,
+  page: number = 1
+) {
   if (limit < 0) {
     throw new Error('Number of orders must be more than 0');
   } else if (page < 1) {
@@ -535,7 +553,28 @@ export function getRecentOrders(limit: number = 10, page: number = 1) {
   }
 
   const offset = (page - 1) * limit;
-  
+
+  if (userOnly) {
+    const searchValue = Number(searchText);
+    const recentOrders = db.prepare(`
+      SELECT
+        orders.id,
+        users.username,
+        SUM(order_items.price_cents * order_items.quantity) AS totalAmount,
+        orders.status,
+        orders.created_at
+      FROM orders
+      JOIN users ON orders.user_id = users.id
+      JOIN order_items ON order_items.order_id = orders.id
+      WHERE users.id = ?
+      GROUP BY orders.id
+      ORDER BY orders.id DESC
+      LIMIT ? OFFSET ?
+    `).all(searchValue, limit, offset);
+
+    return recentOrders;
+  }
+  const searchValue = `%${searchText}%`;
   const recentOrders = db.prepare(`
     SELECT
       orders.id,
@@ -546,26 +585,11 @@ export function getRecentOrders(limit: number = 10, page: number = 1) {
     FROM orders
     JOIN users ON orders.user_id = users.id
     JOIN order_items ON order_items.order_id = orders.id
+    WHERE users.username LIKE ? OR CAST(orders.id AS TEXT) LIKE ?
     GROUP BY orders.id
     ORDER BY orders.id DESC
     LIMIT ? OFFSET ?
-  `).all(limit, offset);
-
-  return recentOrders;
-}
-
-export function getRecentOrder(userId: number, numberOfOrders: number = 10) {
-  const recentOrders = db.prepare(`
-    SELECT
-      order_items.id,
-      order_items.price_cents,
-      orders.status
-    FROM orders
-    JOIN order_items ON order_items.order_id = orders.id
-    WHERE orders.user_id = ?
-    ORDER BY orders.id DESC
-    LIMIT ?
-  `).all(userId, numberOfOrders);
+  `).all(searchValue, searchValue, limit, offset);
 
   return recentOrders;
 }

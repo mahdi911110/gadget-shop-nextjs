@@ -32,8 +32,13 @@ export default async function CartPage() {
 
   return (
     <main className={styles.main}>
-      <div className={styles["card-container"]}>
-        {cartItems.map((cartItem) => (
+      <div className={styles['card-container']}>
+        {cartItems.length === 0 ?
+          <div className={styles['not-found']}>
+            📭 Your cart is empty.
+          </div>
+        :
+          cartItems.map((cartItem) => (
             <div key={cartItem.productId} className={styles.card}>
               <div className={styles["card-img-container"]}>
                 <Image
@@ -60,7 +65,8 @@ export default async function CartPage() {
                 deliveryOption={cartItem.delivery_option}
               />
             </div>
-        ))}
+          ))
+        }
       </div>
       <PaymentSummary
         cartItems={cartItems}
