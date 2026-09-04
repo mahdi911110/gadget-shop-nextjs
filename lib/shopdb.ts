@@ -363,7 +363,8 @@ export function getProducts(page: number = 1, limit: number = 20) {
   return products;
 }
 
-export function getUsers() {
+export function getUsers(usernameOrUserId: string = '') {
+  const searchValue = `%${usernameOrUserId.trim()}%`;
   const users = db.prepare(`
     SELECT
       users.id,
@@ -380,9 +381,10 @@ export function getUsers() {
     FROM users
     LEFT JOIN orders ON users.id = orders.user_id
     LEFT JOIN order_items ON orders.id = order_items.order_id
+    WHERE users.username LIKE ? OR CAST(users.id AS TEXT) LIKE ?
     GROUP BY users.id
     ORDER BY users.id DESC
-  `).all();
+  `).all(searchValue, searchValue);
 
   return users;
 }

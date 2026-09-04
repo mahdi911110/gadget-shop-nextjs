@@ -1,5 +1,6 @@
 import { getOrdersCount, getProductCount, getRecentOrders, getRevenue } from '@/lib/shopdb';
 import styles from './page.module.css';
+import Link from 'next/link';
 
 type RecentOrders = {
   id: number,
@@ -40,32 +41,59 @@ export default function AdminPage() {
       <div className={styles.container}>
         <div className={styles.header}>Recent Orders</div>
         <div className={styles['table-container']}>
-          {recentOrders.length === 0 ?
-            <div className={styles['orders-not-found']}>
+          {recentOrders.length === 0 ? (
+            <div className={styles["orders-not-found"]}>
               No recent orders have been found.
             </div>
-          :
+          ) : (
             <table className={styles['order-table']}>
               <thead>
                 <tr>
-                  <th className={styles['order-table-th']}>Order Id</th>
-                  <th className={styles['order-table-th']}>Customer</th>
-                  <th className={styles['order-table-th']}>Amount</th>
-                  <th className={styles['order-table-th']}>Status</th>
+                  <th className={styles["order-table-th"]}>
+                    <div className={styles["th-container"]}>Order Id</div>
+                  </th>
+                  <th className={styles["order-table-th"]}>
+                    <div className={styles["th-container"]}>Customer</div>
+                  </th>
+                  <th className={styles["order-table-th"]}>
+                    <div className={styles["th-container"]}>Date</div>
+                  </th>
+                  <th className={styles["order-table-th"]}>
+                    <div className={styles["th-container"]}>Amount</div>
+                  </th>
+                  <th className={styles["order-table-th"]}>
+                    <div className={styles["th-container"]}>Action</div>
+                  </th>
                 </tr>
               </thead>
               <tbody>
-                {recentOrders.map(order => (
+                {recentOrders.map((order) => (
                   <tr key={order.id}>
-                    <td className={styles['order-table-td']}>{order.id}</td>
-                    <td className={styles['order-table-td']}>{order.username}</td>
-                    <td className={styles['order-table-td']}>${order.totalAmount / 100}</td>
-                    <td className={styles['order-table-td']}>{order.status}</td>
+                    <td className={styles["order-table-td"]}>{order.id}</td>
+                    <td className={styles["order-table-td"]}>
+                      {order.username}
+                    </td>
+                    <td className={styles["order-table-td"]}>
+                      {order.created_at}
+                    </td>
+                    <td className={styles["order-table-td"]}>
+                      ${order.totalAmount / 100}
+                    </td>
+                    <td
+                      className={`${styles["order-table-td"]} ${styles["product-table-actions"]}`}
+                    >
+                      <Link
+                        href={`/admin/orders/${order.id}`}
+                        className={styles["button-view"]}
+                      >
+                        👁 View
+                      </Link>
+                    </td>
                   </tr>
                 ))}
               </tbody>
             </table>
-          }
+          )}
         </div>
       </div>
     </main>

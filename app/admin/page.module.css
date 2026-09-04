@@ -54,6 +54,27 @@
   padding: 5px 10px;
 }
 
+.th-container {
+  display: flex;
+}
+
+.button-view {
+  text-decoration: none;
+  background-color: rgb(0, 174, 255);
+  color: white;
+  padding: 2px 5px;
+  border-radius: 5px;
+  transition: opacity 0.2s;
+}
+
+.button-view:hover {
+  opacity: 0.7;
+}
+
+.button-view:active {
+  opacity: 0.5;
+}
+
 .orders-not-found {
   color: red;
   font-weight: bold;

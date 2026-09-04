@@ -2,6 +2,7 @@ import { getUsers } from '@/lib/shopdb';
 import styles from './page.module.css';
 import Link from 'next/link';
 import handleUserStatus from './handleUserStatus';
+import SearchComponent from './SearchComponent';
 
 type UsersType = {
   id: number,
@@ -17,12 +18,23 @@ type UsersType = {
   is_active: number
 };
 
-export default function UsersPage() {
-  const users = getUsers() as UsersType[];
+export default async function UsersPage({
+  searchParams
+}: {
+  searchParams: Promise<{
+    search?: string
+  }>
+}) {
+  const { search } = await searchParams; 
+  let newSearch = '';
+  if (search !== undefined) {
+    newSearch = String(search);
+  }
+  const users = getUsers(newSearch) as UsersType[];
 
   return (
     <main className={styles.main}>
-      <input className={styles['input-search']} type="text" placeholder='Search users...' />
+      <SearchComponent />
       <div className={styles['table-container']}>
         <table className={styles.table}>
           <thead>
@@ -61,15 +73,17 @@ export default function UsersPage() {
                 <td className={styles['product-table-td']}>{user.username}</td>
                 <td className={styles['product-table-td']}>{user.email}</td>
                 <td className={styles['product-table-td']}>{user.created_at}</td>
-                <td className={`${styles['product-table-td']} ${styles['product-table-actions']}`}>
-                  <Link className={styles.view} href={`/admin/users/${user.id}`}>
-                    View
-                  </Link>
-                  <form action={handleUserStatus.bind(null, user.id)}>
-                  	<button className={user.is_active ? styles.inactive : `${styles.inactive} ${styles.active}`}>
-											{user.is_active ? 'Inactive' : 'active'}
-										</button>
-                  </form>
+                <td className={styles['product-table-td']}>
+                  <div className={styles['product-table-actions']}>
+                    <Link className={styles.view} href={`/admin/users/${user.id}`}>
+                      View
+                    </Link>
+                    <form action={handleUserStatus.bind(null, user.id)}>
+                      <button className={user.is_active ? styles.inactive : `${styles.inactive} ${styles.active}`}>
+                        {user.is_active ? 'Inactive' : 'active'}
+                      </button>
+                    </form>
+                  </div>
                 </td>
               </tr>
             ))}
