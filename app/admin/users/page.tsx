@@ -77,11 +77,11 @@ export default async function UsersPage({
                   <td className={styles['product-table-td']}>
                     <div className={styles['product-table-actions']}>
                       <Link className={styles.view} href={`/admin/users/${user.id}`}>
-                        View
+                        👁 View
                       </Link>
                       <form action={handleUserStatus.bind(null, user.id)}>
                         <button className={user.is_active ? styles.inactive : `${styles.inactive} ${styles.active}`}>
-                          {user.is_active ? 'Inactive' : 'active'}
+                          {user.is_active ? '⛔ Inactive' : '✅ Active'}
                         </button>
                       </form>
                     </div>

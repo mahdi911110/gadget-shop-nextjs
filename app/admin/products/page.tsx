@@ -80,8 +80,8 @@ export default async function ProductsPage({
                   <td className={styles['product-table-td']}>{product.stock}</td>
                   <td className={styles['product-table-td']}>
                     <div className={styles['product-table-actions']}>
-                      <span className={styles.edit}>Edit</span>
-                      <span className={styles.delete}>Delete</span>
+                      <button className={styles.edit}>✏️ Edit</button>
+                      <button className={styles.delete}>❮ Back</button>
                     </div>
                   </td>
                 </tr>
