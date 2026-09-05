@@ -42,6 +42,11 @@ type UserSession = {
   id: number,
   username: string,
   email: string,
+  phone_number: string,
+  address: string,
+  country: string,
+  city: string,
+  birthday: string,
   role: string
 } | null;
 

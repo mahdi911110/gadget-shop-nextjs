@@ -552,6 +552,11 @@ export function getCurrentUserFromDB(sessionId: string) {
       users.id,
       users.username,
       users.email,
+      users.phone_number,
+      users.address,
+      users.country,
+      users.city,
+      users.birthday,
       users.role
     FROM session
     JOIN users ON session.user_id = users.id
@@ -616,6 +621,50 @@ export function getUser(userId: number) {
 
   return user;
 }
+
+export const editUser = db.transaction(
+  (
+    email: string,
+    username: string,
+    phoneNumber: string,
+    address: string,
+    country: string,
+    city: string,
+    birthday: string,
+    userId: number
+  ) => {
+    if (!userId) {
+      return { error: 'Invalid user.' };
+    }
+
+    const user = getUser(userId);
+    if (!user) {
+      return { error: 'Invalid user.' };
+    }
+
+    db.prepare(`
+      UPDATE users
+      SET
+        username = ?,
+        email = ?,
+        phone_number = ?,
+        address = ?,
+        country = ?,
+        city = ?,
+        birthday = ?
+      WHERE id = ?
+    `).run(
+      username,
+      email,
+      phoneNumber,
+      address,
+      country,
+      city,
+      birthday,
+      userId
+    );
+  }
+);
 
 export function getRecentOrders(
   searchText: string = '',
