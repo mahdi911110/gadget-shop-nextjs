@@ -1,4 +1,14 @@
-# 🛍️ Gadget Shop
+<h1 align="center">🛍️ Gadget Shop</h1>
+
+<p align="center">
+  <img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white">
+  <img src="https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white">
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white">
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB">
+  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white">
+  <img src="https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white">
+  <img src="https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white">
+</p>
 
 A full-stack e-commerce web application built with **Next.js App Router**, **TypeScript**, **SQLite**, **Server Actions**, and **Cloudinary**.
 
@@ -84,49 +94,47 @@ The project uses the **Next.js App Router** and separates storefront, authentica
 A simplified structure:
 
 ```text
-app/
-├── (marketing)/
-│   ├── page.tsx
-│   ├── search/
-│   ├── cart/
-│   └── ...
+online-shop-app/
+├── action/
+│   └── logoutAction.ts
 │
-├── (auth)/
-│   ├── login/
-│   ├── signup/
-│   └── ...
+├── app/
+│   ├── (auth)/
+│   ├── (marketing)/
+│   ├── (profile)/
+│   ├── admin/
+│   ├── globals.css
+│   └── layout.tsx
 │
-├── (profile)/
+├── components/
+│   ├── admin/
+│   ├── auth/
+│   ├── marketing/
 │   └── profile/
-│       ├── page.tsx
-│       └── edit/
 │
-├── admin/
-│   ├── page.tsx
-│   ├── products/
-│   │   ├── page.tsx
-│   │   ├── add-product/
-│   │   └── [productId]/
-│   ├── users/
-│   └── orders/
-│       └── [orderId]/
+├── lib/
+│   ├── auth.ts
+│   ├── shopdb.ts
+│   ├── redirectByRole.ts
+│   └── cloudinary.ts
 │
-components/
-├── admin/
-│   ├── header/
-│   └── sidebar/
-├── auth/
-└── marketing/
-    ├── header/
-    └── product/
-
-lib/
-├── auth.ts
-├── shopdb.ts
-└── ...
-
-public/
-└── ...
+├── public/
+│   ├── icons/
+│   ├── logos/
+│   └── images/
+│
+├── scripts/
+│   ├── migrate.ts
+│   ├── delete.ts
+│   └── admin.ts
+│
+├── envConfig.ts
+├── eslint.config.mjs
+├── next.config.ts
+├── package.json
+├── package-lock.json
+├── README.md
+└── tsconfig.json
 ```
 
 ## 🗄️ Database
@@ -366,7 +374,7 @@ The project uses:
 
 ```bash
 git clone <your-repository-url>
-cd <project-directory>
+cd online-shop-app-nextjs
 ```
 
 ### 2. Install dependencies
@@ -546,4 +554,21 @@ For a larger production workload, a hosted relational database such as PostgreSQ
 
 ## 📄 License
 
-This project is available for educational and portfolio purposes. Add the license that matches your repository before publishing it publicly.
+This project is licensed under the **MIT License**.
+
+See the `LICENSE` file for more information.
+
+---
+
+## 👨‍💻 Author
+
+**Mahdi Gorbany**
+
+- GitHub: [@mahdi911110](https://github.com/mahdi911110)
+
+---
+
+## 🙌 Acknowledgements
+
+- Icons from [SVG Repo](https://www.svgrepo.com/).
+- Built with ❤️ using **React** and **NEXTJS**.
