@@ -90,4 +90,8 @@
   .table-container {
     overflow-x: auto;
   }
+
+  .text-result {
+    font-size: var(--th-font-size-mobile);
+  }
 }

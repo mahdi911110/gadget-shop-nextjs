@@ -39,6 +39,11 @@ export default async function ProductsPage({
   return (
     <main className={styles.main}>
       <SearchProduct />
+      {search &&
+        <div className={styles['text-result']}>
+          Search reslut for: &quot;{newSearch}&quot;
+        </div>
+      }
       <div className={styles['table-container']}>
         {products.length > 0 ?
           <table className={styles.table}>

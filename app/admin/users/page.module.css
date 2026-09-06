@@ -89,10 +89,19 @@
   .table-container {
     overflow-x: auto;
   }
+
+  .text-result {
+    font-size: var(--th-font-size-mobile);
+  }
 }
 
 @media (min-width: 769px) {
   .main {
     padding-top: 95px;
+  }
+
+  .inactive {
+    font-size: 15px;
+    padding: 4.5px 10px;
   }
 }

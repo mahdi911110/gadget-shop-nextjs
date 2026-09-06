@@ -38,6 +38,11 @@ export default async function OrdersPage({
       {orders.length === 0 ? (
         <>
           <SearchComponent />
+          {search &&
+            <div className={styles['text-result']}>
+              Search reslut for: &quot;{newSearch}&quot;
+            </div>
+          }
           <div className={styles["orders-not-found"]}>
             {newSearch === '' ? '📭' : '🔍'} No recent orders have been found.
           </div>
@@ -45,6 +50,11 @@ export default async function OrdersPage({
       ) : (
         <>
           <SearchComponent />
+          {search &&
+            <div className={styles['text-result']}>
+              Search reslut for: &quot;{newSearch}&quot;
+            </div>
+          }
           <div className={styles["table-container"]}>
             <table className={styles.table}>
               <thead>

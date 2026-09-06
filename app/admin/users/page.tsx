@@ -44,6 +44,11 @@ export default async function UsersPage({
   return (
     <main className={styles.main}>
       <SearchComponent />
+      {search &&
+        <div className={styles['text-result']}>
+          Search reslut for: &quot;{newSearch}&quot;
+        </div>
+      }
       <div className={styles['table-container']}>
         {users.length > 0 ?
           <table className={styles.table}>
