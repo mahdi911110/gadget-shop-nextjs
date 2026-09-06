@@ -94,7 +94,7 @@ The project uses the **Next.js App Router** and separates storefront, authentica
 A simplified structure:
 
 ```text
-online-shop-app/
+gadget-shop-nextjs/
 ├── action/
 │   └── logoutAction.ts
 │
@@ -389,7 +389,7 @@ The project uses:
 
 ```bash
 git clone <your-repository-url>
-cd online-shop-app-nextjs
+cd gadget-shop-nextjs
 ```
 
 ### 2. Install dependencies
