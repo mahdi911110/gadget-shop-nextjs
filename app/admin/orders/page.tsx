@@ -40,7 +40,7 @@ export default async function OrdersPage({
           <SearchComponent />
           {search &&
             <div className={styles['text-result']}>
-              Search reslut for: &quot;{newSearch}&quot;
+              Search result for: &quot;{newSearch}&quot;
             </div>
           }
           <div className={styles["orders-not-found"]}>
@@ -52,7 +52,7 @@ export default async function OrdersPage({
           <SearchComponent />
           {search &&
             <div className={styles['text-result']}>
-              Search reslut for: &quot;{newSearch}&quot;
+              Search result for: &quot;{newSearch}&quot;
             </div>
           }
           <div className={styles["table-container"]}>

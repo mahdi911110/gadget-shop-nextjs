@@ -39,7 +39,7 @@ export default async function Home({
     <main>
       {search &&
         <div className={styles['text-result']}>
-          Search reslut for: &quot;{newSearch}&quot;
+          Search result for: &quot;{newSearch}&quot;
         </div>
       }
       <div className={styles.main}>
