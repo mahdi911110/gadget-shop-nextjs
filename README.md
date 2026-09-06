@@ -118,6 +118,21 @@ online-shop-app/
 │   ├── redirectByRole.ts
 │   └── cloudinary.ts
 │
+├── screenshots/
+│   ├── home.png
+│   ├── product.png
+│   ├── cart.png
+│   ├── email-sent.png
+│   ├── login.png
+│   ├── signup.png
+│   ├── orders.png
+│   ├── profile.png
+│   ├── admin-dashboard.png
+│   ├── admin-add-product.png
+│   ├── admin-products.png
+│   ├── admin-users.png
+│   └── admin-orders.png
+│
 ├── public/
 │   ├── icons/
 │   ├── logos/
@@ -490,36 +505,38 @@ This project was built to practice and understand:
 
 ## 📸 Screenshots
 
-Add screenshots of the main pages here:
-
-```text
-screenshots/
-├── home.png
-├── product.png
-├── cart.png
-├── checkout.png
-├── orders.png
-├── profile.png
-├── admin-dashboard.png
-├── admin-products.png
-├── admin-users.png
-└── admin-orders.png
-```
-
-Example:
-
-```md
-## 📸 Preview
-
 ### Home Page
 ![Home Page](screenshots/home.png)
 
 ### Cart
 ![Cart](screenshots/cart.png)
 
+### Orders Page
+![Orders Page](screenshots/orders.png)
+
+### Login Page
+![Login Page](screenshots/login.png)
+
+### Signup Page
+![Signup Page](screenshots/signup.png)
+
+### Email Sent Page
+![Email Sent Page](screenshots/email-sent.png)
+
 ### Admin Dashboard
 ![Admin Dashboard](screenshots/admin-dashboard.png)
-```
+
+### Admin Products
+![Admin Products](screenshots/admin-products.png)
+
+### Admin Orders
+![Admin Orders](screenshots/admin-orders.png)
+
+### Admin Add Product
+![Admin Add Product](screenshots/admin-add-product.png)
+
+### Admin Users
+![Admin Users](screenshots/admin-users.png)
 
 ## 📚 Resources
 
