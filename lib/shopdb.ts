@@ -430,7 +430,10 @@ export function getLastPage(limit: number) {
   return totalPages;
 }
 
-export function getProducts(searchProduct: string = '', page: number = 1, limit: number = 20) {
+export function getProducts(searchProduct: string = '', page: number = 1, limit: number = 10) {
+  page = Math.max(1, Math.floor(page));
+  limit = Math.max(1, Math.floor(limit));
+  
   const offset = (page - 1) * limit;
 
   const searchValue = `%${searchProduct}%`;
@@ -440,7 +443,7 @@ export function getProducts(searchProduct: string = '', page: number = 1, limit:
       *
     FROM products
     WHERE CAST(id AS TEXT) LIKE ? OR product_name LIKE ? OR category LIKE ?
-    ORDER BY id
+    ORDER BY id DESC
     LIMIT ? OFFSET ?
   `).all(
     searchValue,
@@ -450,10 +453,25 @@ export function getProducts(searchProduct: string = '', page: number = 1, limit:
     offset
   );
 
-  return products;
+  const productsCount = db.prepare(`
+    SELECT COUNT(*) AS count
+    FROM products
+    WHERE CAST(id AS TEXT) LIKE ?
+      OR product_name LIKE ?
+      OR category LIKE ?
+  `).get(
+    searchValue,
+    searchValue,
+    searchValue
+  ) as { count: number };
+
+  const totalPages = Math.ceil(productsCount.count / limit);
+
+  return { products, totalPages };
 }
 
-export function getUsers(usernameOrUserId: string = '') {
+export function getUsers(usernameOrUserId: string = '', page: number = 1, limit: number = 10) {
+  const offset = (page - 1) * limit;
   const searchValue = `%${usernameOrUserId.trim()}%`;
   const users = db.prepare(`
     SELECT
@@ -474,9 +492,27 @@ export function getUsers(usernameOrUserId: string = '') {
     WHERE users.username LIKE ? OR CAST(users.id AS TEXT) LIKE ?
     GROUP BY users.id
     ORDER BY users.id DESC
-  `).all(searchValue, searchValue);
+    LIMIT ? OFFSET ?
+  `).all(
+    searchValue,
+    searchValue,
+    limit,
+    offset
+  );
 
-  return users;
+  const productsCount = db.prepare(`
+    SELECT COUNT(*) AS count
+    FROM users
+    WHERE CAST(id AS TEXT) LIKE ?
+      OR username LIKE ?
+  `).get(
+    searchValue,
+    searchValue
+  ) as { count: number };
+
+  const totalPages = Math.ceil(productsCount.count / limit);
+
+  return { users, totalPages };
 }
 
 type OrdersType = {
@@ -668,9 +704,9 @@ export const editUser = db.transaction(
 
 export function getRecentOrders(
   searchText: string = '',
+  page: number = 1,
   userOnly: boolean = false,
-  limit: number = 10,
-  page: number = 1
+  limit: number = 10
 ) {
   if (limit < 0) {
     throw new Error('Number of orders must be more than 0');
@@ -701,7 +737,7 @@ export function getRecentOrders(
     return recentOrders;
   }
   const searchValue = `%${searchText}%`;
-  const recentOrders = db.prepare(`
+  const orders = db.prepare(`
     SELECT
       orders.id,
       users.username,
@@ -717,7 +753,20 @@ export function getRecentOrders(
     LIMIT ? OFFSET ?
   `).all(searchValue, searchValue, limit, offset);
 
-  return recentOrders;
+  const productsCount = db.prepare(`
+    SELECT COUNT(*) AS count
+    FROM orders
+    JOIN users ON users.id = orders.user_id
+    WHERE CAST(orders.id AS TEXT) LIKE ?
+      OR users.username LIKE ?
+  `).get(
+    searchValue,
+    searchValue
+  ) as { count: number };
+
+  const totalPages = Math.ceil(productsCount.count / limit);
+
+  return { orders, totalPages };
 }
 
 export function getOrderItems(orderId: number) {

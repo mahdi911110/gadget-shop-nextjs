@@ -2,6 +2,7 @@
 
 import { addProduct } from "@/lib/shopdb";
 import cloudinary from "@/lib/cloudinary";
+import { redirect } from "next/navigation";
 
 type PrevState = {
   error?: string
@@ -62,5 +63,5 @@ export default async function addProductAction(prevState: PrevState, formData: F
     imageUrl
   );
   
-  return null;
+  redirect('/admin/products');
 }

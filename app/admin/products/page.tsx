@@ -3,30 +3,39 @@ import styles from './page.module.css';
 import SearchProduct from './SearchProduct';
 import Image from "next/image";
 import Link from 'next/link';
+import Pagination from '@/components/pagination/Pagination';
 
 type ProductType = {
-  id: number,
-  product_name: string,
-  price_cents: number,
-  stock: number,
-  category: string,
-  description: string,
-  image_url: string
+  products: {
+    id: number,
+    product_name: string,
+    price_cents: number,
+    stock: number,
+    category: string,
+    description: string,
+    image_url: string
+  } [],
+  totalPages: number;
 }
 
 export default async function ProductsPage({
   searchParams
 }: {
   searchParams: Promise<{
-    search?: string
+    search?: string,
+    page?: string
   }>
 }) {
-  const { search } = await searchParams;
+  const { search, page } = await searchParams;
   let newSearch = '';
+  let newPage = 1;
   if (search !== undefined) {
     newSearch = search.trim();
   }
-  const products = getProducts(newSearch) as ProductType[];
+  if (page !== undefined) {
+    newPage = Number(page.trim());
+  }
+  const { products, totalPages } = getProducts(newSearch, newPage) as ProductType;
   return (
     <main className={styles.main}>
       <SearchProduct />
@@ -115,6 +124,12 @@ export default async function ProductsPage({
           </div>
         }
       </div>
+      <Pagination
+        url="/admin/products"
+        search={newSearch}
+        page={newPage}
+        totalPages={totalPages}
+      />
     </main>
   );
 }

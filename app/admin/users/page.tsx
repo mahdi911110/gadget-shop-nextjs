@@ -3,34 +3,43 @@ import styles from './page.module.css';
 import Link from 'next/link';
 import handleUserStatus from './handleUserStatus';
 import SearchComponent from './SearchComponent';
+import Pagination from '@/components/pagination/Pagination';
 
 type UsersType = {
-  id: number,
-  username: string,
-  email: string,
-  phone_number: string,
-  country: string,
-  city: string,
-  birthday: string,
-  created_at: string,
-  totalQuantity: number,
-  totalSpent: number,
-  is_active: number
+  users: {
+    id: number,
+    username: string,
+    email: string,
+    phone_number: string,
+    country: string,
+    city: string,
+    birthday: string,
+    created_at: string,
+    totalQuantity: number,
+    totalSpent: number,
+    is_active: number
+  } [],
+  totalPages: number
 };
 
 export default async function UsersPage({
   searchParams
 }: {
   searchParams: Promise<{
-    search?: string
+    search?: string,
+    page?: string
   }>
 }) {
-  const { search } = await searchParams; 
+  const { search, page } = await searchParams; 
   let newSearch = '';
+  let newPage = 1;
   if (search !== undefined) {
     newSearch = search.trim();
   }
-  const users = getUsers(newSearch) as UsersType[];
+  if (page !== undefined) {
+    newPage = Number(page.trim());
+  }
+  const { users, totalPages } = getUsers(newSearch) as UsersType;
 
   return (
     <main className={styles.main}>
@@ -96,6 +105,12 @@ export default async function UsersPage({
           </div>
         }
       </div>
+      <Pagination
+        url='/admin/users'
+        search={newSearch}
+        page={newPage}
+        totalPages={totalPages}
+      />
     </main>
   );
 }

@@ -8,6 +8,7 @@
   padding: 10px;
   justify-content: space-between;
   border-bottom: 1px solid gray;
+  z-index: 100;
 }
 
 .main-logo-link {

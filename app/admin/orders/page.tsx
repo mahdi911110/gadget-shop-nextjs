@@ -2,28 +2,37 @@ import { getRecentOrders } from "@/lib/shopdb";
 import SearchComponent from "./SearchComponent";
 import styles from './page.module.css';
 import Link from "next/link";
+import Pagination from "@/components/pagination/Pagination";
 
 type RecentOrders = {
-  id: number;
-  username: string;
-  totalAmount: number;
-  status: string;
-  created_at: string;
+  orders: {
+    id: number;
+    username: string;
+    totalAmount: number;
+    status: string;
+    created_at: string;
+  } [],
+  totalPages: number;
 };
 
 export default async function OrdersPage({
   searchParams
 }: {
   searchParams: Promise<{
-    search?: string
+    search?: string,
+    page?: string
   }>
 }) {
-  const { search } = await searchParams;
+  const { search, page } = await searchParams;
   let newSearch = '';
+  let newPage = 1;
   if (search !== undefined) {
     newSearch = search.trim();
   }
-  const orders = getRecentOrders(newSearch) as RecentOrders[];
+  if (page !== undefined) {
+    newPage = Number(page.trim());
+  }
+  const { orders, totalPages } = getRecentOrders(newSearch, newPage) as RecentOrders;
   return (
     <main className={styles.main}>
       {orders.length === 0 ? (
@@ -87,6 +96,12 @@ export default async function OrdersPage({
           </div>
         </>
       )}
+      <Pagination
+        url="/admin/orders"
+        search={newSearch}
+        page={newPage}
+        totalPages={totalPages}
+      />
     </main>  
   );
 }

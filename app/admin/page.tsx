@@ -3,15 +3,17 @@ import styles from './page.module.css';
 import Link from 'next/link';
 
 type RecentOrders = {
-  id: number,
-  username: string,
-  totalAmount: number,
-  status: string,
-  created_at: string
+  orders: {
+    id: number,
+    username: string,
+    totalAmount: number,
+    status: string,
+    created_at: string
+  } []
 };
 
 export default function AdminPage() {
-  const recentOrders = getRecentOrders() as RecentOrders[];
+  const { orders } = getRecentOrders() as RecentOrders;
   
   const productCount = getProductCount();
 
@@ -41,7 +43,7 @@ export default function AdminPage() {
       <div className={styles.container}>
         <div className={styles.header}>Recent Orders</div>
         <div className={styles['table-container']}>
-          {recentOrders.length === 0 ? (
+          {orders.length === 0 ? (
             <div className={styles["orders-not-found"]}>
               📭 No recent orders have been found.
             </div>
@@ -67,7 +69,7 @@ export default function AdminPage() {
                 </tr>
               </thead>
               <tbody>
-                {recentOrders.map((order) => (
+                {orders.map((order) => (
                   <tr key={order.id}>
                     <td className={styles["order-table-td"]}>{order.id}</td>
                     <td className={styles["order-table-td"]}>
