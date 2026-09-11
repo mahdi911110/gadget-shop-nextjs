@@ -3,13 +3,24 @@
   position: fixed;
   top: 44px;
   bottom: 0;
-  left: 0;
   width: 140px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background-color: rgb(240, 240, 240);
   padding: 10px;
+}
+
+.sidebar-en,
+.sidebar-mobile-en {
+  left: 0;
+  direction: ltr;
+}
+
+.sidebar-fa,
+.sidebar-mobile-fa {
+  right: 0;
+  direction: rtl;
 }
 
 .sidebar-top {

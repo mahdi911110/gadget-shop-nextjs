@@ -1,0 +1,200 @@
+{
+  "mainSearch": {
+    "placeholder": "Search a product or a category",
+    "searchResult": "Search result for:"
+  },
+  "mainLogo": {
+    "gadgetText": "GADGET",
+    "shopText": "SHOP"
+  },
+  "pagination": {
+    "buttonNext": "next",
+    "buttonPrev": "previous",
+    "pageText": "page"
+  },
+  "card": {
+    "viewLink": "👁 View",
+    "addToCart": "Add To Cart",
+    "addingToCart": "Adding...",
+    "outOfStock": "📦 Out of stock"
+  },
+  "sidebar": {
+    "dashboard": "📊 Dashboard",
+    "products": "📦 Products",
+    "orders": "📋 Orders",
+    "addProduct": "➕ Add Product",
+    "users": "👥 Users",
+    "settings": "⚙️ Settings"
+  },
+  "auth": {
+    "email": "Email:",
+    "emailOrUsername": "Enter email or username",
+    "emailPlaceholder": "Enter email",
+    "password": "Password:",
+    "passwordPlaceholder": "Enter password",
+    "showPass": "Show password",
+    "login": "LOGIN",
+    "loginButton": "Login",
+    "loggingIn": "Logging in...",
+    "forgetPass": "Forgot Your Password?",
+    "sendEmail": "Send Email",
+    "noAccount": "Don't Have Account?",
+    "createAccount": "Create Account",
+    "emptyField": "Fields must not be empty.",
+    "signup": "SIGN UP",
+    "username": "Username:",
+    "usernamePlaceholder": "Enter username",
+    "phoneNumber": "Phone number:",
+    "phoneNumberPlaceholder": "Enter phone number",
+    "address": "Address:",
+    "addressPlaceholder": "Enter address",
+    "country": "Country:",
+    "countryPlaceholder": "Enter country",
+    "city": "City:",
+    "cityPlaceholder": "Enter city",
+    "birthday": "Birthday:",
+    "againPass": "Type password again:",
+    "againPassPlaceholder": "Enter password again",
+    "passInfo": "Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one number, and one special character.",
+    "haveAccount": "Do you have account?",
+    "register": "Register",
+    "registering": "Registering...",
+    "sendEmailHeader": "SENDING EMAIL",
+    "sendEmailButton": "Send Email",
+    "sendEmailPlaceholder": "Enter a registered email"
+  },
+  "cart": {
+    "paymentSummary": {
+      "orderSummary": "Order summary",
+      "items": "Items",
+      "shippingAndHandling": "Shipping & handling:",
+      "totalBeforeTax": "Total before tax:",
+      "estimatedTax": "Estimated tax (10%):",
+      "orderTotal": "Order Total:",
+      "proceedingToCheckout": "Proceeding to Checkout...",
+      "proceedToCheckout": "Proceed to Checkout"
+    },
+    "card": {
+      "empty": "📭 Your cart is empty.",
+      "quantity": "Quantity:"
+    },
+    "editForm": {
+      "edit": "Edit",
+      "editing": "Editing...",
+      "editInput": "Enter quantity",
+      "save": "Save",
+      "saving": "Saving..."
+    },
+    "deleteButton": {
+      "delete": "Delete",
+      "deleting": "Deleting..."
+    },
+    "deliveryOption": {
+      "deliveryText": "Choose a delivery option:",
+      "freeShipping": "FREE Shipping",
+      "shipping": "Shipping",
+      "updateDelivery": "Updating delivery option..."
+    }
+  },
+  "order": {
+    "buyAgain": "Buy Again",
+    "buyingAgain": "Buying...",
+    "orderId": "Order Id",
+    "orderDate": "Order Date",
+    "totalAmount": "Total Amount",
+    "myOrders": "My Orders",
+    "viewOrder": "view your order history and tracking details",
+    "noOrders": "📭 You don't have any orders.",
+    "noOrder": "📭 No order have been found.",
+    "statusTextNotFound": "Not Found",
+    "statusTextPreparing": "Preparing and will be deliverd on",
+    "statusTextShipping": "Shipped and will be deliverd on",
+    "statusTextDeliverd": "Deliverd on"
+  },
+  "profile": {
+    "profile": "PROFILE"
+  },
+  "admin": {
+    "adminHeader": {
+      "admin": "Admin 👤",
+      "logout": "Logout"
+    },
+    "dashboard": {
+      "dashboard": "Dashboard",
+      "products": "Products",
+      "orders": "Orders",
+      "revenue": "Revenue",
+      "recentOrders": "Recent Orders",
+      "customer": "Customer",
+      "date": "Date",
+      "amount": "Amount",
+      "action": "Action",
+      "view": "👁 View",
+      "recentOrdersNotFound": "📭 No recent orders have been found."
+    },
+    "products": {
+      "id": "ID",
+      "image": "Image",
+      "name": "Name",
+      "description": "Description",
+      "category": "Category",
+      "price": "Price",
+      "stock": "Stock",
+      "searchPlaceholder": "Search products...",
+      "NoProductsFound": "No products have found."
+    },
+    "orders": {
+      "searchOrdersPlaceholder": "Search Orders...",
+      "noRecentOrdersFound": "No orders have been found."
+    },
+    "productEdit": {
+      "editProduct": "Edit Product With ID:",
+      "productName": "Product Name",
+      "productNamePlaceholder": "Enter product name",
+      "productImage": "Product Image",
+      "back": "Back",
+      "reset": "Reset",
+      "productNotFound": "Product not found.",
+      "pricePlaceholder": "Enter price",
+      "stockPlaceholder": "Enter stock",
+      "categoryPlaceholder": "Enter category",
+      "descriptionPlaceholder": "Write a description for product"
+    },
+    "orderItems": {
+      "orderItemId": "Order Item ID",
+      "productId": "Product ID",
+      "status": "Status",
+      "orderItemsNotFound": "⚠️ No order item have been found.",
+      "quantity": "Quantity",
+      "statusNotFound": "🔴 Not Found",
+      "statusPreparing": "🟣 Preparing",
+      "statusShipped": "🟡 Shipped",
+      "statusDeliverd": "🟢 Deliverd"
+    },
+    "addProduct": {
+      "add": "Add",
+      "adding": "Adding..."
+    },
+    "users": {
+      "userId": "User ID",
+      "username": "Username",
+      "email": "Email",
+      "joined": "Joined",
+      "active": "✅ Active",
+      "inActive": "⛔ Inactive",
+      "searchPlaceholder": "Search users...",
+      "usersNotFound": "No users have been found."
+    },
+    "user": {
+      "joined": "Joined:",
+      "orders": "Orders:",
+      "totalSpent": "Total Spent"
+    },
+    "settings": {
+      "darkMode": "Dark Mode"
+    }
+  },
+  "editProfile": {
+    "editProfileTitle": "EDIT PROFILE"
+  }
+}

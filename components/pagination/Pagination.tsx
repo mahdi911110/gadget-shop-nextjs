@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styles from './Pagination.module.css';
+import Translation from "../translation/Translation";
 
 type PaginationProps = {
   url: string;
@@ -14,11 +15,12 @@ export default function Pagination({ url, search = '', page, totalPages }: Pagin
     ? `${url}?page=${page - 1}`
     : `${url}?search=${encodeURIComponent(search)}&page=${page - 1}`;
 
-const nextPageUrl =
-  search === ''
-    ? `${url}?page=${page + 1}`
-    : `${url}?search=${encodeURIComponent(search)}&page=${page + 1}`;
-    
+  const nextPageUrl =
+    search === ''
+      ? `${url}?page=${page + 1}`
+      : `${url}?search=${encodeURIComponent(search)}&page=${page + 1}`;
+  
+
   return (
     <div className={styles["page-container"]}>
       {page > 1 && (
@@ -26,12 +28,12 @@ const nextPageUrl =
           className={styles['link-page']}
           href={previousPageUrl}
         >
-          Previous
+          <Translation translationKey="pagination.buttonPrev" />
         </Link>
       )}
 
       <div className={styles['text-page']}>
-        Page: {page} / {totalPages}
+        <Translation translationKey="pagination.pageText" />: {page} / {totalPages}
       </div>
 
       {page < totalPages && (
@@ -39,7 +41,7 @@ const nextPageUrl =
           className={styles['link-page']}
           href={nextPageUrl}
         >
-          Next
+          <Translation translationKey="pagination.buttonNext" />
         </Link>
       )}
     </div>

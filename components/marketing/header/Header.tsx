@@ -6,8 +6,9 @@ import styles from "./Header.module.css";
 import { getCurrentUser } from "@/lib/auth";
 import { getQuantity } from "@/lib/shopdb";
 import SearchComponent from "./SearchComponent";
+import Translation from "@/components/translation/Translation";
 
-export default async function Header() {
+export default async function Header({ lang }: { lang: 'fa' | 'en' }) {
   const user = await getCurrentUser();
   const widthHeight = 50;
   const quantity = user ? getQuantity(user.id) ?? 0 : 0;
@@ -15,17 +16,17 @@ export default async function Header() {
     <header className={styles.header}>
       <div className={styles["left-section"]}>
         <div className={styles["logo-container"]}>
-          <Link href="/" className={styles["main-logo-link"]}>
-            <span className={styles["text-gadget"]}>GADGET</span>
-            <span className={styles["text-shop"]}>SHOP</span>
+          <Link href={`/${lang}`} className={styles["main-logo-link"]}>
+            <span className={styles["text-gadget"]}><Translation translationKey="mainLogo.gadgetText" /></span>
+            <span className={styles["text-shop"]}><Translation translationKey="mainLogo.shopText"/></span>
           </Link>
         </div>
       </div>
       <div className={styles["middle-section"]}>
-        <SearchComponent />
+        <SearchComponent lang={lang} />
       </div>
       <div className={styles["right-section"]}>
-        <NavLink href="/orders" classCss={styles["order-link"]}>
+        <NavLink href={`/${lang}/orders`} classCss={styles["order-link"]}>
           <Image
             className={styles["order-link-img"]}
             width={widthHeight}
@@ -34,7 +35,7 @@ export default async function Header() {
             alt="Order"
           />
         </NavLink>
-        <NavLink href="/cart" classCss={styles["cart-link"]}>
+        <NavLink href={`/${lang}/cart`} classCss={styles["cart-link"]}>
           <div className={styles.cart}>
             <Image
               className={styles["cart-link-img"]}
@@ -48,7 +49,7 @@ export default async function Header() {
         </NavLink>
         {user ?
           (user.role === 'admin' ?
-            <NavLink href="/admin" classCss={styles["login"]}>
+            <NavLink href={`/${lang}/admin`} classCss={styles["login"]}>
               <Image
                 className={styles["login-img"]}
                 width={widthHeight}
@@ -58,7 +59,7 @@ export default async function Header() {
               />
             </NavLink>
           : 
-            <NavLink href="/profile" classCss={styles["login"]}>
+            <NavLink href={`/${lang}/profile`} classCss={styles["login"]}>
               <Image
                 className={styles["login-img"]}
                 width={widthHeight}
@@ -69,7 +70,7 @@ export default async function Header() {
             </NavLink>
           )
         :
-          <NavLink href="/login" classCss={styles["login"]}>
+          <NavLink href={`/${lang}/login`} classCss={styles["login"]}>
             <Image
               className={styles["login-img"]}
               width={widthHeight}

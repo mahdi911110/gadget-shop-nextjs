@@ -1,7 +1,6 @@
 import styles from './ProductComponent.module.css';
 import Image from 'next/image';
-import AddToCartButton from './AddToCartButton';
-import Link from 'next/link';
+import CartButtonAndLink from './CartButtonAndLink';
 
 type ProductType = {
   id: number,
@@ -13,7 +12,7 @@ type ProductType = {
   image_url: string
 }
 
-export default function ProductComponent({ product }: { product: ProductType }) {
+export default function ProductComponent({ product, lang }: { product: ProductType, lang: 'fa' | 'en' }) {
   return (
     <div className={styles.card}>
       <div className={styles['image-container']}>
@@ -41,14 +40,7 @@ export default function ProductComponent({ product }: { product: ProductType }) 
           <div className={styles['card-discount']}>{product.stock > 0 ? `$${product.price_cents / 100}` : ''}</div>
         </div>
         <div className={styles['text-added']}>✓ Added</div>
-        <div className={styles['card-button-container']}>
-          <Link href={`/${product.id}`} className={styles['card-link-show']}>👁 View</Link>
-          {product.stock > 0 ?
-            <AddToCartButton productId={product.id} />
-          :
-            <div className={styles['out-of-stock']}>📦 Out of stock</div>
-          }
-        </div>
+        <CartButtonAndLink productId={product.id} productStock={product.stock} lang={lang} />
       </div>
     </div>
   );

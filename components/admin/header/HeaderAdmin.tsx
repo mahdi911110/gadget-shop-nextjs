@@ -2,19 +2,24 @@ import Link from 'next/link';
 
 import styles from './HeaderAdmin.module.css';
 import logoutAction from '@/action/logoutAction';
+import Translation from '@/components/translation/Translation';
 
-export default function HeaderAdmin() {
+export default async function HeaderAdmin({ 
+  lang
+}: {
+  lang: 'fa' | 'en'
+}) {
   return (
     <header className={styles.header}>
-      <Link href="/" className={styles['main-logo-link']}>
-        <span className={styles['text-gadget']}>GADGET</span>
-        <span className={styles['text-shop']}>SHOP</span>
+      <Link href={`/${lang}`} className={styles['main-logo-link']}>
+        <span className={styles['text-gadget']}><Translation translationKey='mainLogo.gadgetText' /></span>
+        <span className={styles['text-shop']}><Translation translationKey='mainLogo.shopText' /></span>
       </Link>
       <div className={styles['admin-logout']}>
-        <div className={styles['text-admin']}>Admin 👤</div>
-        <form action={logoutAction}>
+        <div className={styles['text-admin']}><Translation translationKey='admin.adminHeader.admin' /></div>
+        <form action={logoutAction.bind(null, lang)}>
 					<button className={styles['button-logout']} type='submit'>
-						Logout
+						<Translation translationKey='admin.adminHeader.logout' />
 					</button>
         </form>
       </div>

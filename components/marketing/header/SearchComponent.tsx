@@ -5,9 +5,12 @@ import { useState, type ChangeEvent, type KeyboardEvent } from "react";
 import styles from "./SearchComponent.module.css";
 import Image from "next/image";
 import { redirect } from "next/navigation";
+import { useTranslation } from "react-i18next";
 
-export default function SearchComponent() {
+export default function SearchComponent({ lang }: { lang: 'fa' | 'en' }) {
   const [searchText, setSearchText] = useState("");
+
+  const { t } = useTranslation();
 
   function handleSearchText(event: ChangeEvent<HTMLInputElement>) {
     setSearchText(event.target.value);
@@ -15,10 +18,10 @@ export default function SearchComponent() {
 
   function handleSearchButton() {
     if (searchText.trim() === "") {
-      redirect('/');
+      redirect(`/${lang}`);
     }
 
-    redirect(`/?search=${searchText.trim()}`);
+    redirect(`/${lang}/?search=${searchText.trim()}`);
   }
 
   function handleKeyDown(event: KeyboardEvent<HTMLInputElement>) {
@@ -33,17 +36,17 @@ export default function SearchComponent() {
   return (
     <div className={styles["search-box"]}>
       <input
-        className={styles["search-input"]}
+        className={`${styles["search-input"]} ${lang === 'fa' ? styles["search-input-fa"] : ''}`}
         type="text"
         name="search-input"
         value={searchText}
         onChange={handleSearchText}
         onKeyDown={handleKeyDown}
-        placeholder="Search a product or a category"
+        placeholder={`${t('mainSearch.placeholder')}`}
       />
 
       <button
-        className={styles["search-button"]}
+        className={`${styles["search-button"]} ${lang === 'fa' ? styles["search-button-fa"] : ''}`}
         type="button"
         onClick={handleSearchButton}
       >

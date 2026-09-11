@@ -1,0 +1,117 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  padding-top: var(--padding-top-pc);
+  padding-left: var(--padding-left-pc);
+  padding-right: var(--padding-right-pc);
+  gap: 40px;
+}
+
+.main-fa {
+  padding-right: var(--padding-left-pc);
+  padding-left: var(--padding-right-pc);
+}
+
+.table {
+  width: 100%;
+}
+
+.table,
+.product-table-th,
+.product-table-td {
+  border: 1px solid gray;
+  border-collapse: collapse;
+  padding: 5px 10px;
+  height: 100%;
+}
+
+.th-container {
+  display: flex;
+}
+
+.product-table-actions {
+  display: flex;
+  border: none;
+  gap: 5px;
+  height: 100%;
+  align-items: center;
+}
+
+.view,
+.inactive {
+  background-color: var(--button-edit-color);
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.view {
+  text-decoration: none;
+  padding: 3.5px 4px;
+}
+
+.inactive {
+  background-color: red;
+  border: none;
+  padding: 2px 5px;
+}
+
+.view:hover,
+.inactive:hover {
+  opacity: 0.7;
+}
+
+.view:active,
+.inactive:active {
+  opacity: 0.5;
+}
+
+.active {
+  background-color: green;
+}
+
+.not-found {
+  font-weight: bold;
+  color: red;
+}
+
+@media (max-width: 768px) {
+  .main {
+    padding-left: var(--padding-left);
+    gap: 20px;
+  }
+
+  .main-fa {
+    padding-right: var(--padding-left);
+    padding-left: 10px;
+  }
+
+  .product-table-th,
+  .not-found {
+    font-size: var(--th-font-size-mobile);
+  }
+
+  .product-table-td {
+    font-size: var(--td-font-size-mobile);
+  }
+
+  .table-container {
+    overflow-x: auto;
+  }
+
+  .text-result {
+    font-size: var(--th-font-size-mobile);
+  }
+}
+
+@media (min-width: 769px) {
+  .main {
+    padding-top: 95px;
+  }
+
+  .inactive {
+    font-size: 15px;
+    padding: 4.5px 10px;
+  }
+}

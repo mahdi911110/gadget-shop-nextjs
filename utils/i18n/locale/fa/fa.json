@@ -1,0 +1,200 @@
+{
+  "mainSearch": {
+    "placeholder": "جستجوی محصول یا دسته بندی",
+    "searchResult": "نتیجه جستجو برای:"
+  },
+  "mainLogo": {
+    "gadgetText": "گجت",
+    "shopText": "فروشگاه"
+  },
+  "pagination": {
+    "buttonNext": "بعدی",
+    "buttonPrev": "قبلی",
+    "pageText": "صفحه"
+  },
+  "card": {
+    "viewLink": "👁 نمایش",
+    "addToCart": "افزودن به سبد",
+    "addingToCart": "افزودن...",
+    "outOfStock": "📦 ناموجود"
+  },
+  "sidebar": {
+    "dashboard": "📊 داشبورد",
+    "products": "📦 محصولات",
+    "orders": "📋 سفارشات",
+    "addProduct": "➕ اضافه کردن محصول",
+    "users": "👥 کاربران",
+    "settings": "⚙️ تنظیمات"
+  },
+  "auth": {
+    "email": "ایمیل:",
+    "emailOrUsername": "وارد کردن ایمیل یا نام کاربری",
+    "emailPlaceholder": "ایمیل را وارد کنید",
+    "password": "رمزعبور:",
+    "passwordPlaceholder": "رمزعبور را وارد کنید",
+    "showPass": "نمایش رمزعبور",
+    "login": "ورود به حساب",
+    "loginButton": "ورود",
+    "loggingIn": "درحال ورود...",
+    "forgetPass": "رمزعبور رو فراموش کردید؟",
+    "sendEmail": "ارسال ایمیل",
+    "noAccount": "حساب کاربری ندارید؟",
+    "createAccount": "ساخت حساب",
+    "emptyField": "ورودی ها نباید خالی باشند.",
+    "signup": "ساخت حساب کاربری",
+    "username": "نام کاربری:",
+    "usernamePlaceholder": "نام کاربری را وارد کنید",
+    "phoneNumber": "شماره موبایل:",
+    "phoneNumberPlaceholder": "شماره موبایل را وارد کنید",
+    "address": "آدرس:",
+    "addressPlaceholder": "آدرس را وارد کنید",
+    "country": "کشور:",
+    "countryPlaceholder": "کشور را وارد کنید",
+    "city": "شهر:",
+    "cityPlaceholder": "شهر را وارد کنید",
+    "birthday": "تولد:",
+    "againPass": "وارد کردن دوباره رمزعبور",
+    "againPassPlaceholder": "رمزعبور را دوباره وارد کیند",
+    "passInfo": "رمز عبور باید حداقل شامل ۸ کاراکتر، یک حرف بزرگ، یک حرف کوچک، یک عدد و یک کاراکتر ویژه باشد.",
+    "haveAccount": "حساب کاربری دارید؟",
+    "register": "ثبت نام",
+    "registering": "درحال ثبت نام...",
+    "sendEmailHeader": "ارسال کردن ایمیل",
+    "sendEmailButton": "ارسال ایمیل",
+    "sendEmailPlaceholder": "یک ایمیل ثبت شده وارد کنید"
+  },
+  "cart": {
+    "paymentSummary": {
+      "orderSummary": "خلاصه سفارش",
+      "items": "آیتم ها",
+      "shippingAndHandling": "هزینه ارسال و آماده‌سازی:",
+      "totalBeforeTax": "جمع کل پیش از کسر مالیات:",
+      "estimatedTax": "مالیات برآوردی (10٪):",
+      "orderTotal": "جمع کل سفارش:",
+      "proceedingToCheckout": "ادامه مراحل تسویه حساب...",
+      "proceedToCheckout": "ادامه جهت تسویه حساب"
+    },
+    "card": {
+      "empty": "سبد خرید شما خالیست 📭",
+      "quantity": "تعداد:"
+    },
+    "editForm": {
+        "edit": "ویرایش",
+        "editing": "درحال ویرایش...",
+        "editInput": "تعداد را وارد کنید",
+        "save": "ذخیره",
+        "saving": "درحال ذخیره..."
+    },
+    "deleteButton": {
+      "delete": "حذف",
+      "deleting": "درحال حذف..."
+    },
+    "deliveryOption": {
+      "deliveryText": "یک گزینه حمل‌ونقل انتخاب کنید:",
+      "freeShipping": "حمل‌ونقل رایگان",
+      "shipping": "حمل‌ونقل",
+      "updateDelivery": "به‌روزرسانی گزینه های حمل‌ونقل..."
+    }
+  },
+  "order": {
+    "buyAgain": "خرید مجدد",
+    "buyingAgain": "درحال خرید...",
+    "orderId": "شناسه سفارش",
+    "orderDate": "تاریخ سفارش",
+    "totalAmount": "مبلغ کل",
+    "myOrders": "سفارش‌های من",
+    "viewOrder": "مشاهده تاریخچه سفارش و جزئیات رهگیری",
+    "noOrders": "📭 شما هیچ سفارشی ندارید.",
+    "noOrder": "📭 هیچ سفارشی یافت نشد.",
+    "statusTextNotFound": "یافت نشد",
+    "statusTextPreparing": "درحال آماده سازی و تحویل در تاریخ",
+    "statusTextShipping": "ارسال شده و تحویل داده خواهد شد در تاریخ",
+    "statusTextDeliverd": "تحویل‌داده‌شده در"
+  },
+  "profile": {
+    "profile": "نمایه"
+  },
+  "admin": {
+    "adminHeader": {
+      "admin": "مدیر 👤",
+      "logout": "خروج"
+    },
+    "dashboard": {
+      "dashboard": "داشبورد",
+      "products": "محصولات",
+      "orders": "سفارشات",
+      "revenue": "درآمد",
+      "recentOrders": "سفارشات اخیر",
+      "customer": "مشتری",
+      "date": "تاریخ",
+      "amount": "هزینه",
+      "action": "اقدامات",
+      "view": "👁 نمایش",
+      "recentOrdersNotFound": "📭 هیچ سفارش جدیدی یافت نشد."
+    },
+    "products": {
+      "id": "شناسه",
+      "image": "تصاویر",
+      "name": "نام",
+      "description": "توضیحات",
+      "category": "دسته بندی",
+      "price": "مبلغ",
+      "stock": "موجودی",
+      "searchPlaceholder": "جستجوی محصولات...",
+      "noProductsFound": "هیچ محصولی یافت نشد."
+    },
+    "orders": {
+      "searchPlaceholder": "جستجوی سفارشات...",
+      "noOrdersFound": "هیچ سفارشی یافت نشد."
+    },
+    "productEdit": {
+      "editProduct": "ویرایش محصول با شناسه:",
+      "productName": "نام محصول",
+      "productNamePlaceholder": "نام محصول را وارد کنید",
+      "productImage": "تصویر محصول",
+      "back": "بازگشت",
+      "reset": "تنظیم مجدد",
+      "productNotFound": "محصول یافت نشد.",
+      "pricePlaceholder": "مبلغ را وارد کنید",
+      "stockPlaceholder": "موجودی را وارد کنید",
+      "categoryPlaceholder": "دسته بندی را وارد کنید",
+      "descriptionPlaceholder": "یک توضیح برای محصول بنویسید"
+    },
+    "orderItems": {
+      "orderItemId": "شناسه اقلام سفارش",
+      "productId": "شناسه محصول",
+      "status": "وضعیت",
+      "orderItemsNotFound": "⚠️ هیچ قلم سفارشی یافت نشد.",
+      "quantity": "تعداد",
+      "statusNotFound": "🔴 یافت نشد",
+      "statusPreparing": "🟣 در حال آماده‌سازی",
+      "statusShipped": "🟡 ارسال شد",
+      "statusDeliverd": "🟢 تحویل داده شد"
+    },
+    "addProduct": {
+      "add": "افزودن",
+      "adding": "درحال افزودن..."
+    },
+    "users": {
+      "userId": "شناسه کاربر",
+      "username": "نام کاربری",
+      "email": "ایمیل",
+      "joined": "عضویت",
+      "active": "✅ فعال",
+      "inActive": "⛔ غیرفعال",
+      "searchPlaceholder": "جستجوی کاربران...",
+      "usersNotFound": "هیچ کاربری یافت نشد."
+    },
+    "user": {
+      "joined": "عضوشده در:",
+      "orders": "سفارشات:",
+      "totalSpent": "مجموع هزینه‌شده:"
+    },
+    "settings": {
+      "darkMode": "حالت شب"
+    }
+  },
+  "editProfile": {
+    "editProfileTitle": "ویرایش نمایه"
+  }
+}

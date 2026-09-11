@@ -3,7 +3,7 @@
 import { deleteSession } from "@/lib/auth";
 import { redirect } from "next/navigation";
 
-export default async function logoutAction() {
+export default async function logoutAction(lang: 'fa' | 'en') {
 	await deleteSession();
-	redirect('/');
+	redirect(`/${lang}`);
 }
