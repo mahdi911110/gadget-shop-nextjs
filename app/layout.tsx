@@ -1,4 +1,5 @@
 import { Roboto } from 'next/font/google';
+import { ThemeProvider } from 'next-themes';
 import './globals.css';
 import { ToastContainer } from 'react-toastify';
 
@@ -8,13 +9,13 @@ const roboto = Roboto({
 
 export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
-    <>
-      <ToastContainer />
-      <html>
-        <body className={roboto.className}>
+    <html suppressHydrationWarning>
+      <body className={roboto.className}>
+        <ThemeProvider attribute="class" enableSystem defaultTheme='system'>
           {children}
-        </body>
-      </html>
-    </>
+          <ToastContainer />
+        </ThemeProvider>
+      </body>
+    </html>
   );
 }

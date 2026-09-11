@@ -7,6 +7,7 @@ import { getCurrentUser } from "@/lib/auth";
 import { getQuantity } from "@/lib/shopdb";
 import SearchComponent from "./SearchComponent";
 import Translation from "@/components/translation/Translation";
+import DarkButton from "../../darkButton/DarkButton";
 
 export default async function Header({ lang }: { lang: 'fa' | 'en' }) {
   const user = await getCurrentUser();
@@ -26,7 +27,8 @@ export default async function Header({ lang }: { lang: 'fa' | 'en' }) {
         <SearchComponent lang={lang} />
       </div>
       <div className={styles["right-section"]}>
-        <NavLink href={`/${lang}/orders`} classCss={styles["order-link"]}>
+        <DarkButton widthHeight={widthHeight} />
+        <NavLink href={`/${lang}/orders`} classCss={styles["header-link"]}>
           <Image
             className={styles["order-link-img"]}
             width={widthHeight}
@@ -35,7 +37,7 @@ export default async function Header({ lang }: { lang: 'fa' | 'en' }) {
             alt="Order"
           />
         </NavLink>
-        <NavLink href={`/${lang}/cart`} classCss={styles["cart-link"]}>
+        <NavLink href={`/${lang}/cart`} classCss={styles["header-link"]}>
           <div className={styles.cart}>
             <Image
               className={styles["cart-link-img"]}
@@ -49,7 +51,7 @@ export default async function Header({ lang }: { lang: 'fa' | 'en' }) {
         </NavLink>
         {user ?
           (user.role === 'admin' ?
-            <NavLink href={`/${lang}/admin`} classCss={styles["login"]}>
+            <NavLink href={`/${lang}/admin`} classCss={styles["header-link"]}>
               <Image
                 className={styles["login-img"]}
                 width={widthHeight}
@@ -59,7 +61,7 @@ export default async function Header({ lang }: { lang: 'fa' | 'en' }) {
               />
             </NavLink>
           : 
-            <NavLink href={`/${lang}/profile`} classCss={styles["login"]}>
+            <NavLink href={`/${lang}/profile`} classCss={styles["header-link"]}>
               <Image
                 className={styles["login-img"]}
                 width={widthHeight}
@@ -70,7 +72,7 @@ export default async function Header({ lang }: { lang: 'fa' | 'en' }) {
             </NavLink>
           )
         :
-          <NavLink href={`/${lang}/login`} classCss={styles["login"]}>
+          <NavLink href={`/${lang}/login`} classCss={styles["header-link"]}>
             <Image
               className={styles["login-img"]}
               width={widthHeight}

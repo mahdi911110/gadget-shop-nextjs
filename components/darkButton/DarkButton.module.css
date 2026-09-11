@@ -1,0 +1,20 @@
+.theme-button {
+  background-color: var(--link);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 1px;
+  transition: transform 0.2s;
+}
+
+.theme-button:hover {
+  transform: scale(1.05);
+}
+
+.theme-button:active {
+  transform: scale(0.9);
+}
+
+.theme-img {
+  object-fit: contain;
+}

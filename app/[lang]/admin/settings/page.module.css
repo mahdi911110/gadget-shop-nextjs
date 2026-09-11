@@ -7,6 +7,11 @@
   padding-right: var(--padding-right-pc);
 }
 
+.main-fa {
+  padding-right: var(--padding-left-pc);
+  padding-left: var(--padding-right-pc);
+}
+
 .switch {
   position: relative;
   display: inline-block;
@@ -62,5 +67,10 @@
 @media (max-width: 768px) {
   .main {
     padding-left: var(--padding-left);
+  }
+
+  .main-fa {
+    padding-right: var(--padding-left);
+    padding-left: 10px;
   }
 }

@@ -5,8 +5,8 @@
   top: 0;
   right: 0;
   left: 0;
-  border-bottom: 1px solid black;
-  background-color: white;
+  border-bottom: 1px solid var(--foreground);
+  background-color: var(--background);
   z-index: 100;
 }
 
@@ -47,6 +47,7 @@
   align-items: center;
   border-radius: 50%;
   background-color: var(--primary-color);
+  color: var(--surface);
   font-size: 10px;
 }
 
@@ -67,7 +68,19 @@
   padding-right: 4px;
 }
 
-@media (max-width: 768px) {
+.header-link {
+  background-color: var(--link);
+  border-radius: 10px;
+  padding: 1px;
+  transition: transform 0.2s;
+}
+
+.header-link:hover {
+  transform: scale(1.05);
+}
+
+.header-link:active {
+  transform: scale(0.9);
 }
 
 @media (min-width: 769px) {

@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { getQuantity } from '@/lib/shopdb';
 import { getCurrentUser } from '@/lib/auth';
 import Translation from '../translation/Translation';
+import DarkButton from '../darkButton/DarkButton';
 
 export default async function HeaderProfile({ lang }: { lang: 'fa' | 'en' }) {
   const user = await getCurrentUser();
@@ -23,7 +24,8 @@ export default async function HeaderProfile({ lang }: { lang: 'fa' | 'en' }) {
         </div>
       </div>
       <div className={styles["right-section"]}>
-        <Link href={`/${lang}/orders`} className={styles["order-link"]}>
+        <DarkButton widthHeight={widthHeight} />
+        <Link href={`/${lang}/orders`} className={styles["header-link"]}>
           <Image
             className={styles["order-link-img"]}
             width={widthHeight}
@@ -32,7 +34,7 @@ export default async function HeaderProfile({ lang }: { lang: 'fa' | 'en' }) {
             alt="Order"
           />
         </Link>
-        <Link href={`/${lang}/cart`} className={styles["cart-link"]}>
+        <Link href={`/${lang}/cart`} className={styles["header-link"]}>
           <div className={styles.cart}>
             <Image
               className={styles["cart-link-img"]}
@@ -45,7 +47,7 @@ export default async function HeaderProfile({ lang }: { lang: 'fa' | 'en' }) {
           </div>
         </Link>
         <form action={logoutAction.bind(null, lang)}>
-					<button className={styles['button-logout']} type='submit'>
+					<button className={styles['header-link']} type='submit'>
 						<Image
               className={styles["cart-link-img"]}
               width={widthHeight}
