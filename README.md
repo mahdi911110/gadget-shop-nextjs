@@ -25,6 +25,7 @@ This project was built as a practical full-stack learning project with a focus o
 - 🔎 Product and order search
 - 📄 Pagination
 - ☁️ Cloudinary image upload
+- 🌙 Dark mode with system theme support
 - 🌍 Internationalization (i18n) with English and Persian
 - 🔗 Locale-based routing (`/en` and `/fa`)
 - ↔️ RTL layout support for Persian
