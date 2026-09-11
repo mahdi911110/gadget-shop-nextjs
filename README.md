@@ -16,6 +16,19 @@ This project was built as a practical full-stack learning project with a focus o
 
 ## ✨ Features
 
+- 🛍️ Product browsing and shopping cart
+- 🔐 User authentication
+- 👤 User profile and profile editing
+- 📦 Order management
+- 🛠️ Admin dashboard
+- ➕ Add and edit products
+- 🔎 Product and order search
+- 📄 Pagination
+- ☁️ Cloudinary image upload
+- 🌍 Internationalization (i18n) with English and Persian
+- 🔗 Locale-based routing (`/en` and `/fa`)
+- ↔️ RTL layout support for Persian
+
 ### 🛒 Storefront
 - Browse products
 - Product search
