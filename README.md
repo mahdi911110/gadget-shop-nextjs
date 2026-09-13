@@ -8,6 +8,8 @@
   <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white">
   <img src="https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white">
   <img src="https://img.shields.io/badge/Cloudinary-3448C5?style=for-the-badge&logo=cloudinary&logoColor=white">
+  <img src="https://img.shields.io/badge/Zod-3E67B1?style=for-the-badge&logo=zod&logoColor=white">
+  <img src="https://img.shields.io/badge/i18next-26A69A?style=for-the-badge&logo=i18next&logoColor=white">
 </p>
 
 A full-stack e-commerce web application built with **Next.js App Router**, **TypeScript**, **SQLite**, **Server Actions**, and **Cloudinary**.
@@ -49,6 +51,7 @@ This project was built as a practical full-stack learning project with a focus o
 - Role-based access control
 - Profile information page
 - Dedicated profile editing flow
+- Server-side form validation with Zod
 
 ### 💳 Checkout & Orders
 - Checkout flow
@@ -100,6 +103,9 @@ This project was built as a practical full-stack learning project with a focus o
 | **Cloudinary** | Product image storage and delivery |
 | **Day.js** | Date calculations and order delivery status |
 | **CSS Modules** | Component/page-scoped styling |
+| **Zod** | Server-side schema validation |
+| **i18next** | Internationalization |
+| **next-themes** | Dark mode and theme management |
 
 ## 🏗️ Architecture
 
@@ -113,12 +119,13 @@ gadget-shop-nextjs/
 │   └── logoutAction.ts
 │
 ├── app/
-│   ├── (auth)/
-│   ├── (marketing)/
-│   ├── (profile)/
-│   ├── admin/
-│   ├── globals.css
-│   └── layout.tsx
+│   └── [lang]
+│       ├── (auth)/
+│       ├── (marketing)/
+│       ├── (profile)/
+│       ├── admin/
+│       ├── globals.css
+│       └── layout.tsx
 │
 ├── components/
 │   ├── admin/
@@ -470,8 +477,11 @@ Before deploying, make sure:
 
 ## 🧪 Validation & Error Handling
 
-The application validates important data on the server, including:
+The application uses server-side validation to protect data integrity and provide user-friendly error messages.
 
+Validation includes:
+
+- Zod schema validation for authentication forms
 - Product IDs
 - Quantities
 - Stock values
@@ -516,6 +526,7 @@ This project was built to practice and understand:
 - Component organization
 - CSS Modules
 - TypeScript
+- Zod schema validation
 
 ## 📸 Screenshots
 
@@ -562,6 +573,9 @@ This project was built to practice and understand:
 - [better-sqlite3](https://www.npmjs.com/package/better-sqlite3)
 - [Cloudinary Documentation](https://cloudinary.com/documentation)
 - [Day.js Documentation](https://day.js.org/docs/en/installation/installation)
+- [i18next Documentation](https://www.i18next.com/)
+- [next-themes Documentation](https://github.com/pacocoursey/next-themes)
+- [Zod Documentation](https://zod.dev/)
 
 ## ⚠️ Production Notes
 
@@ -589,7 +603,6 @@ This project is licensed under the **MIT License**.
 
 See the `LICENSE` file for more information.
 
----
 
 ## 👨‍💻 Author
 
@@ -597,7 +610,6 @@ See the `LICENSE` file for more information.
 
 - GitHub: [@mahdi911110](https://github.com/mahdi911110)
 
----
 
 ## 🙌 Acknowledgements
 
