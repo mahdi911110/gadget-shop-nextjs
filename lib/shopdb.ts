@@ -880,7 +880,8 @@ export function getQuantity(userId: number) {
       SUM(cart_items.quantity) AS totalQuantity
     FROM cart_items
     JOIN carts ON carts.id = cart_items.cart_id
-    JOIN users ON users.id = ?
+    JOIN users ON users.id = carts.user_id
+    WHERE users.id = ?
     GROUP BY users.id
   `).get(userId) as { totalQuantity: number} | undefined;
 
