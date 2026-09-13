@@ -24,7 +24,8 @@
     "react-dom": "19.2.8",
     "react-i18next": "^17.0.13",
     "react-redux": "^9.3.0",
-    "react-toastify": "^11.1.0"
+    "react-toastify": "^11.1.0",
+    "zod": "^4.5.4"
   },
   "devDependencies": {
     "@types/better-sqlite3": "^9.6.0",
