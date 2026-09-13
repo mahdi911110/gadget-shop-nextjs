@@ -28,7 +28,7 @@ export default async function AdminPage({
   const revenue = ((getRevenue() ?? 0) / 100);
 
   return (
-    <main className={`${styles.main} ${styles['main-fa']}`}>
+    <main className={`${styles.main} ${lang === 'fa' ? styles['main-fa'] : ''}`}>
       <div className={styles.container}>
         <div className={styles.header}><Translation translationKey='admin.dashboard.dashboard' /></div>
         <div className={styles['dashboard-detail']}>

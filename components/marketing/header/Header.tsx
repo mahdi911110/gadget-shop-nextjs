@@ -8,6 +8,7 @@ import { getQuantity } from "@/lib/shopdb";
 import SearchComponent from "./SearchComponent";
 import Translation from "@/components/translation/Translation";
 import DarkButton from "../../darkButton/DarkButton";
+import LanguageButton from "@/components/LanguageButton/LanguageButton";
 
 export default async function Header({ lang }: { lang: 'fa' | 'en' }) {
   const user = await getCurrentUser();
@@ -27,6 +28,7 @@ export default async function Header({ lang }: { lang: 'fa' | 'en' }) {
         <SearchComponent lang={lang} />
       </div>
       <div className={styles["right-section"]}>
+        <LanguageButton lang={lang} size={widthHeight} />
         <DarkButton widthHeight={widthHeight} />
         <NavLink href={`/${lang}/orders`} classCss={styles["header-link"]}>
           <Image

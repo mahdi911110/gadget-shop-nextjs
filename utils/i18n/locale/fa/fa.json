@@ -191,7 +191,8 @@
       "totalSpent": "مجموع هزینه‌شده:"
     },
     "settings": {
-      "darkMode": "حالت شب"
+      "darkMode": "حالت شب",
+      "changeLanguage": "تغییر زبان"
     }
   },
   "editProfile": {

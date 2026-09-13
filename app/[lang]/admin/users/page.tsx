@@ -46,7 +46,7 @@ export default async function UsersPage({
   const { users, totalPages } = getUsers(newSearch) as UsersType;
 
   return (
-    <main className={`${styles.main} ${styles['main-fa']}`}>
+    <main className={`${styles.main} ${lang === 'fa' ? styles['main-fa'] : ''}`}>
       <SearchComponent lang={lang} />
       {search &&
         <div className={styles['text-result']}>

@@ -1,0 +1,36 @@
+.language-button {
+  background-color: var(--link);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.language-button:hover {
+  transform: scale(1.05);
+}
+
+.language-button:active {
+  transform: scale(0.9);
+}
+
+.language-button img {
+  object-fit: contain;
+}
+
+.globe-text {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  min-width: 18px;
+  min-height: 18px;
+  padding: 0 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: var(--primary-color);
+  color: var(--surface);
+  font-size: 10px;
+}
