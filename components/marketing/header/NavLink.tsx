@@ -1,29 +1,32 @@
-'use client';
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 
-import styles from './NavLink.module.css';
+import styles from "./NavLink.module.css";
 
-export default function NavLink(
-  { 
-    href, classCss, children
-  }: {
-    href:string, classCss:string, children:ReactNode}
-  ) {
+export default function NavLink({
+  href,
+  classCss,
+  children,
+  lang,
+}: {
+  href: string;
+  classCss: string;
+  children: ReactNode;
+  lang: "fa" | "en";
+}) {
   const path = usePathname();
   let isActive;
-  if (path.startsWith('/admin')) {
+  if (path.startsWith(`/${lang}/admin`)) {
     isActive =
-    href === "/admin"
-      ? path === "/admin"
-      : path.endsWith(href);
+      href === `/${lang}/admin`
+        ? path === `/${lang}/admin`
+        : path.endsWith(href);
   } else {
     isActive =
-      href === "/"
-        ? path === "/"
-        : path.startsWith(href);
+      href === `/${lang}` ? path === `/${lang}` : path.startsWith(href);
   }
   return (
     <Link

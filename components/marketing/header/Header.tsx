@@ -30,7 +30,7 @@ export default async function Header({ lang }: { lang: 'fa' | 'en' }) {
       <div className={styles["right-section"]}>
         <LanguageButton lang={lang} size={widthHeight} />
         <DarkButton widthHeight={widthHeight} />
-        <NavLink href={`/${lang}/orders`} classCss={styles["header-link"]}>
+        <NavLink lang={lang} href={`/${lang}/orders`} classCss={styles["header-link"]}>
           <Image
             className={styles["order-link-img"]}
             width={widthHeight}
@@ -39,7 +39,7 @@ export default async function Header({ lang }: { lang: 'fa' | 'en' }) {
             alt="Order"
           />
         </NavLink>
-        <NavLink href={`/${lang}/cart`} classCss={styles["header-link"]}>
+        <NavLink lang={lang} href={`/${lang}/cart`} classCss={styles["header-link"]}>
           <div className={styles.cart}>
             <Image
               className={styles["cart-link-img"]}
@@ -53,7 +53,7 @@ export default async function Header({ lang }: { lang: 'fa' | 'en' }) {
         </NavLink>
         {user ?
           (user.role === 'admin' ?
-            <NavLink href={`/${lang}/admin`} classCss={styles["header-link"]}>
+            <NavLink lang={lang} href={`/${lang}/admin`} classCss={styles["header-link"]}>
               <Image
                 className={styles["login-img"]}
                 width={widthHeight}
@@ -63,7 +63,7 @@ export default async function Header({ lang }: { lang: 'fa' | 'en' }) {
               />
             </NavLink>
           : 
-            <NavLink href={`/${lang}/profile`} classCss={styles["header-link"]}>
+            <NavLink lang={lang} href={`/${lang}/profile`} classCss={styles["header-link"]}>
               <Image
                 className={styles["login-img"]}
                 width={widthHeight}
@@ -74,7 +74,7 @@ export default async function Header({ lang }: { lang: 'fa' | 'en' }) {
             </NavLink>
           )
         :
-          <NavLink href={`/${lang}/login`} classCss={styles["header-link"]}>
+          <NavLink lang={lang} href={`/${lang}/login`} classCss={styles["header-link"]}>
             <Image
               className={styles["login-img"]}
               width={widthHeight}
