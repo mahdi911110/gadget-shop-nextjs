@@ -4,17 +4,34 @@ import Link from "next/link";
 import { useTranslation } from "react-i18next";
 
 import styles from '../auth.module.css';
+import { useActionState } from "react";
+import { forgotPasswordAction } from "./forgotPasswordAction";
 
 export default function ForgotPassword({ lang }: { lang: 'fa' | 'en' }) {
   const { t } = useTranslation();
-  return (
+  const [state, formAction, isPending] = useActionState(
+    forgotPasswordAction.bind(null, lang),
+    null
+  );
+  if (state) {
+    return (
     <div className={styles.container}>
-      <div className={styles.title}>{t('auth.sendEmailHeader')}</div>
+      <div className={styles.title}>EMAIL SENT</div>
       <div className={styles.box}>
-        <div className={styles.text}>{t('auth.email')}</div>
-        <input className={styles.input} type="email" placeholder={t('auth.sendEmailPlaceholder')} />
+        <div className={styles.text}>If this email is registerd in this site we send you email.</div>
+        <div className={styles.text}>Please check your email box to chage your password.</div>
       </div>
-      <button className={styles.button}>{t('auth.sendEmailButton')}</button>
+    </div>
+    );
+  }
+  return (
+    <form action={formAction} className={styles.container}>
+      <div className={styles.title}>{t('auth.sendEmailHeader')}</div>
+        <div className={styles.box}>
+          <div className={styles.text}>{t('auth.email')}</div>
+          <input className={styles.input} type="email" name="email" placeholder={t('auth.sendEmailPlaceholder')} />
+        </div>
+        <button disabled={isPending} type="submit" className={styles.button}>{t('auth.sendEmailButton')}</button>
       <div className={styles['under-input']}>
         {`${t('auth.noAccount')} `}
         <Link className={styles.link} href={`/${lang}/signup`}>
@@ -27,6 +44,6 @@ export default function ForgotPassword({ lang }: { lang: 'fa' | 'en' }) {
           {t('auth.loginButton')}
         </Link>
       </div>
-    </div>
+    </form>
   );
 }

@@ -1,5 +1,6 @@
 import Database from 'better-sqlite3';
 import bcrypt from 'bcrypt';
+import crypto from 'node:crypto';
 import dayjs from 'dayjs';
 
 const db = new Database('shop.db');
@@ -74,6 +75,13 @@ db.exec(`
     user_id INTEGER NOT NULL,
     expire_at TEXT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
+  );
+  CREATE TABLE IF NOT EXISTS password_reset_tokens (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    token_hash TEXT NOT NULL UNIQUE,
+    expires_at TEXT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
   );
 `);
 
@@ -1116,4 +1124,96 @@ export function searchProducts(productNameOrCategory: string) {
   }
 
   return products;
+}
+
+export function verifyingEmail(email: string) {
+  const user = db
+    .prepare(`
+      SELECT id FROM users
+      WHERE email = ?
+    `)
+    .get(email) as { id: number } | undefined;
+
+  if (!user) {
+    return undefined;
+  }
+
+  db.prepare(`
+    DELETE FROM password_reset_tokens
+    WHERE user_id = ?
+  `).run(user.id);
+
+  const token = crypto.randomBytes(32).toString('hex');
+
+  const tokenHash = crypto
+    .createHash('sha256')
+    .update(token)
+    .digest('hex');
+
+  const expiresAt = dayjs()
+    .add(15, 'minutes')
+    .toISOString();
+
+  db.prepare(`
+    INSERT INTO password_reset_tokens (
+      user_id,
+      token_hash,
+      expires_at
+    ) VALUES (?, ?, ?)
+  `).run(user.id, tokenHash, expiresAt);
+
+  return token;
+}
+
+export function resetPasswordDB(token: string, passwordHash: string) {
+  const tokenHash = crypto
+  .createHash('sha256')
+  .update(token)
+  .digest('hex');
+
+  const resetToken = db
+  .prepare(`
+    SELECT user_id, expires_at
+    FROM password_reset_tokens
+    WHERE token_hash = ?
+  `).get(tokenHash) as
+    | {
+        user_id: number;
+        expires_at: string;
+      }
+    | undefined;
+  
+  if (!resetToken) {
+    return { error: 'Invalid or expired reset link.' };
+  }
+
+  const expired = dayjs().isAfter(dayjs(resetToken.expires_at));
+
+  if (expired) {
+    db.prepare(`
+      DELETE FROM password_reset_tokens
+      WHERE token_hash = ?
+    `).run(tokenHash);
+
+    return { error: 'This reset link has expired.' };
+  }
+
+  const resetPassword = db.transaction(() => {
+    db.prepare(`
+      UPDATE users
+      SET password_hash = ?
+      WHERE id = ?
+    `).run(passwordHash, resetToken.user_id);
+
+    db.prepare(`
+      DELETE FROM password_reset_tokens
+      WHERE token_hash = ?
+    `).run(tokenHash);
+  });
+
+  resetPassword();
+
+  return {
+    success: true,
+  };
 }
