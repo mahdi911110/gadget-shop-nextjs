@@ -61,7 +61,16 @@
     "registering": "Registering...",
     "sendEmailHeader": "SENDING EMAIL",
     "sendEmailButton": "Send Email",
-    "sendEmailPlaceholder": "Enter a registered email"
+    "sendEmailPlaceholder": "Enter a registered email",
+    "resetPassword": "RESET PASSWORD",
+    "newPassword": "New password:",
+    "newPasswordAgain" : "Type new password again:",
+    "newPasswordPlaceholder": "Enter new password",
+    "newPasswordAgainPlaceholder" : "Enter new password again",
+    "resetPasswordButton": "Reset Password",
+    "invalidTokenTitle": "INVALID OR EXPIRED TOKEN",
+    "invalidTokenText": "The token is invalid or expired.",
+    "sendAgainText": "Please send your email again"
   },
   "cart": {
     "paymentSummary": {

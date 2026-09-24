@@ -30,7 +30,7 @@ export async function forgotPasswordAction(lang : 'fa' | 'en', prevState: PrevSt
   const token = verifyingEmail(email);
 
   if (!token) {
-    return { error: 'This email does not exist.' };
+    return { error: lang === 'fa' ? 'این ایمیل وجود ندارد.' : 'This email does not exist.' };
   }
 
   const resend = new Resend(process.env.RESEND_API_KEY);
@@ -66,7 +66,7 @@ export async function forgotPasswordAction(lang : 'fa' | 'en', prevState: PrevSt
   });
 
   if (error) {
-    return { error: 'Failed to send email.' };
+    return { error: lang === 'fa' ? 'ارسال ایمیل با شکست مواجه شد.' : 'Failed to send email.' };
   }
 
   return { success: true };

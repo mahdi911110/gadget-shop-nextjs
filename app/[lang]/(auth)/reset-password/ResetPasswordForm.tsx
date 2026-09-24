@@ -15,25 +15,25 @@ export default function ResetPasswordForm({ lang, token }: { lang: "fa" | "en", 
   const [showPassword, setShowPassword] = useState(false);
   return (
     <form action={formAction} className={styles.container}>
-      <div className={styles.title}>RESET PASSWORD</div>
+      <div className={styles.title}>{t('auth.resetPassword')}</div>
         <div className={styles.box}>
-          <div className={styles.text}>New password:</div>
+          <div className={styles.text}>{t('auth.newPassword')}</div>
           <input
             className={styles.input}
             type={showPassword ? 'text' : "password"}
             name="newPassword"
-            placeholder="Enter new password"
+            placeholder={t('auth.newPasswordPlaceholder')}
             required
           />
         </div>
         <div className={styles.box}>
-          <div className={styles.text}>Type new password again:</div>
+          <div className={styles.text}>{t('auth.newPasswordAgain')}</div>
           <input
             className={styles.input}
             type={showPassword ? 'text' : "password"}
             name="newPasswordAgain"
             autoComplete="new-password"
-            placeholder="Enter new password again"
+            placeholder={t('auth.newPasswordAgainPlaceholder')}
             required
           />
         </div>
@@ -55,7 +55,7 @@ export default function ResetPasswordForm({ lang, token }: { lang: "fa" | "en", 
           type="submit"
           className={styles.button}
         >
-          Reset
+          {t('auth.resetPasswordButton')}
         </button>
       <div className={styles["under-input"]}>
         {`${t("auth.haveAccount")} `}

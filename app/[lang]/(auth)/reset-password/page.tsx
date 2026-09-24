@@ -1,7 +1,7 @@
-import Link from "next/link";
 import styles from '../auth.module.css';
 import redirectByRole from "@/lib/redirectByRole";
 import ResetPasswordForm from "./ResetPasswordForm";
+import InvalidResetPassword from './InvalidResetPassword';
 
 export default async function ResetPasswordPage({
   params,
@@ -16,21 +16,7 @@ export default async function ResetPasswordPage({
   if (!token) {
     return (
       <main className={styles.main}>
-        <div className={styles.container}>
-          <div className={styles.title}>INVALID OR EXPIRED TOKEN</div>
-          <div className={styles.box}>
-            <div className={styles.text}>The token is invalid or expired.</div>
-          </div>
-          <div className={styles['under-input']}>
-            {"Please send your email again "}
-            <Link
-              className={styles.link}
-              href={`/${lang}/forgot-password`}
-            >
-              Send again
-            </Link>
-          </div>
-        </div>
+        <InvalidResetPassword lang={lang} />
       </main>
     );
   }

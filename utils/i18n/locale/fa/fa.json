@@ -61,7 +61,16 @@
     "registering": "درحال ثبت نام...",
     "sendEmailHeader": "ارسال کردن ایمیل",
     "sendEmailButton": "ارسال ایمیل",
-    "sendEmailPlaceholder": "یک ایمیل ثبت شده وارد کنید"
+    "sendEmailPlaceholder": "یک ایمیل ثبت شده وارد کنید",
+    "resetPassword": "بازنشانی رمزعبور",
+    "newPassword": "رمزعبور جدید:",
+    "newPasswordAgain" : "رمزعبور جدید را دوباره بنویسید:",
+    "newPasswordPlaceholder": "رمزعبور جدید را وارد کنید",
+    "newPasswordAgainPlaceholder" : "رمزعبور جدید را دوباره وارد کنید",
+    "resetPasswordButton": "بازنشانی رمزعبور",
+    "invalidTokenTitle": "توکن نامعتبر یا منقضی‌شده",
+    "invalidTokenText": "توکن نامعتبر یا منقضی شده است.",
+    "sendAgainText": "لطفاً ایمیل خود را دوباره ارسال کنید "
   },
   "cart": {
     "paymentSummary": {
